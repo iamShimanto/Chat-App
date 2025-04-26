@@ -43,6 +43,7 @@ const ChatList = () => {
     }
   });
 
+  // ============= friend list data
   useEffect(() => {
     onValue(ref(db, "friendList"), (snapshot) => {
       let arr = [];
