@@ -25,7 +25,7 @@ const ChatList = () => {
         </div>
         <div className="person overflow-y-auto h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Naruto Uzumaki"
             message="I Hate You"
             time="12 : 30 am"
@@ -34,7 +34,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Kakashi Hatake"
             message="Slap You...."
             time="12 : 30 am"
@@ -43,7 +43,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Monkey D. Luffy"
             message="Faull........"
             time="12 : 30 am"
@@ -52,7 +52,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Madara Uchiha"
             message="Need Money ....."
             time="12 : 30 am"
@@ -61,7 +61,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Eren Yeager"
             message="Love You ....."
             time="12 : 30 am"
@@ -70,7 +70,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Manjiro Sano Mikey"
             message="Slap You ...."
             time="12 : 30 am"
@@ -79,7 +79,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Giyu Tomioka"
             message="Faull........"
             time="12 : 30 am"
@@ -88,7 +88,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Sasuke Uchiha"
             message="Need Money ....."
             time="12 : 30 am"
@@ -97,7 +97,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Sasuke Uchiha"
             message="Need Money ....."
             time="12 : 30 am"
@@ -106,7 +106,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Sasuke Uchiha"
             message="Need Money ....."
             time="12 : 30 am"
@@ -115,7 +115,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Sasuke Uchiha"
             message="Need Money ....."
             time="12 : 30 am"
@@ -124,7 +124,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Sasuke Uchiha"
             message="Need Money ....."
             time="12 : 30 am"
@@ -133,7 +133,7 @@ const ChatList = () => {
             stylingMessage="text-[#99AAB5]"
           />
           <CommonPerson
-            image="images/logo.png"
+            image="images/default.png"
             name="Sasuke Uchiha"
             message="Need Money ....."
             time="12 : 30 am"

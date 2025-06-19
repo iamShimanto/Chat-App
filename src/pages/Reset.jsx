@@ -3,10 +3,8 @@ import { FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router";
 
 const Reset = () => {
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
   };
 
   return (

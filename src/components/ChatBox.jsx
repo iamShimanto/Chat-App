@@ -23,7 +23,7 @@ const ChatBox = () => {
           <div className="flex items-center gap-4 cursor-pointer">
             <img
               className="h-12 w-12 rounded-full"
-              src="images/logo.png"
+              src="images/default.png"
               alt="logo"
             />
             <h5 className="text-lg font-semibold font-inter text-white">

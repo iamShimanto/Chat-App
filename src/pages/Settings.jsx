@@ -68,8 +68,8 @@ const Settings = () => {
   return (
     <>
       <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35] p-4 relative">
-        <h2 className="text-2xl text-primary font-semibold">My Profile</h2>
-        <div className="img flex justify-center my-10 gap-2">
+        <h2 className="text-2xl text-primary font-semibold">Settings</h2>
+        <div className="img flex justify-center my-10">
           <img
             className="w-20 h-20 rounded-full"
             src={userInfo.photoURL}
@@ -79,7 +79,7 @@ const Settings = () => {
             onClick={() => {
               setEditable(true), setPhotoUpdate(true), setUsernameUpdate(false);
             }}
-            className="text-2xl text-primary cursor-pointer hover:text-brand"
+            className="text-2xl text-primary cursor-pointer hover:text-brand duration-300 -translate-x-1"
           />
         </div>
         <div className="username text-center">
