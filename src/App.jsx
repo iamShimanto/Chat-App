@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Reset from "./pages/Reset";
 import Profile from "./pages/Profile";
 import Settigns from "./pages/Settings";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Registration />} />
           <Route path="/reset" element={<Reset />} />
+          <Route path="*" element={<Error />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/profile" element={<Profile />} />
