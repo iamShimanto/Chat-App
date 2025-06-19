@@ -1,17 +1,60 @@
 import React, { useState } from "react";
-import { Link, Navigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { loggedUser } from "../store/slices/authSlice";
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state)=> state.userData.user)
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    signInWithEmailAndPassword(auth, userData.email, userData.password)
+      .then(() => {
+        if (auth.currentUser.emailVerified) {
+          toast.success("Login Successful!");
+          setTimeout(() => {
+            navigate("/");
+            dispatch(loggedUser(auth.currentUser));
+          }, 2000);
+        } else {
+          toast.error("Please Verify Your Email!");
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (errorCode === "auth/invalid-email") {
+          toast.error("Enter a valid Email!");
+        }
+        if (errorCode === "auth/invalid-credential") {
+          toast.error("Invalid Credential!");
+        }
+        if (errorCode === "auth/missing-password") {
+          toast.error("Enter Password!");
+        }
+      });
   };
+
+  if (userInfo) {
+    return <Navigate to='/' />
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0F1012] px-4">
+      <ToastContainer position="top-right" autoClose={5000} />
       <div className="bg-[#16181C] p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all hover:scale-[1.01]">
         <div className="mb-8 text-center">
           <h2 className="text-4xl font-bold text-[#7289DA] mb-2">Welcome</h2>
@@ -22,6 +65,9 @@ const Login = () => {
           <div className="relative group">
             <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#99AAB5] group-hover:text-[#7289DA] transition-colors" />
             <input
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, email: e.target.value }))
+              }
               type="email"
               name="email"
               placeholder="Email Address"
@@ -34,6 +80,9 @@ const Login = () => {
             <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#99AAB5] group-hover:text-[#7289DA] transition-colors" />
             <div className="relative">
               <input
+                onChange={(e) =>
+                  setUserData((prev) => ({ ...prev, password: e.target.value }))
+                }
                 type={isOpen ? "password" : "text"}
                 name="password"
                 placeholder="Password"

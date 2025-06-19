@@ -4,11 +4,14 @@ import { FaUserGroup } from "react-icons/fa6";
 import { GrContactInfo } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlinePerson3 } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router";
+import { loggedUser } from "../store/slices/authSlice";
 
 const Navbar = () => {
   const [editable, setEditable] = useState(false);
   const updateProfileRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleProfile = () => {
     if (editable) {
@@ -25,6 +28,11 @@ const Navbar = () => {
       }
     });
   };
+
+  const handleSignOut = () => {
+    dispatch(loggedUser(null));
+  };
+
   return (
     <>
       <nav className="bg-nav_bg h-screen flex flex-col justify-between px-2">
@@ -90,12 +98,24 @@ const Navbar = () => {
           {editable && (
             <div
               ref={updateProfileRef}
-              className="py-2 w-40 border border-[rgba(255,255,255,0.28)] bg-[#303841] text-sm absolute bottom-full left-0 rounded-md text-primary"
+              className="py-2 w-40 border border-[rgba(255,255,255,0.28)] bg-[#303841] text-sm absolute bottom-full left-0 rounded-md text-primary z-10"
             >
-              <Link to='/profile' className="hover:bg-nav_bg px-4 py-2 block">Profile</Link>
-              <Link to='settings' className="hover:bg-nav_bg px-4 py-2 mb-2 block">Settings</Link>
+              <Link to="/profile" className="hover:bg-nav_bg px-4 py-2 block">
+                Profile
+              </Link>
+              <Link
+                to="settings"
+                className="hover:bg-nav_bg px-4 py-2 mb-2 block"
+              >
+                Settings
+              </Link>
               <div className="border-t border-[rgba(255,255,255,0.22)]"></div>
-              <div className="hover:bg-nav_bg px-4 py-2 mt-2">Log out</div>
+              <div
+                onClick={handleSignOut}
+                className="hover:bg-nav_bg px-4 py-2 mt-2"
+              >
+                Log out
+              </div>
             </div>
           )}
         </div>

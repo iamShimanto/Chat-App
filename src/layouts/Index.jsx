@@ -1,14 +1,20 @@
-import React from 'react'
-import { Outlet } from 'react-router'
-import Navbar from './Navbar'
+import React from "react";
+import { Navigate, Outlet } from "react-router";
+import Navbar from "./Navbar";
+import { useSelector } from "react-redux";
 
 const Layout = () => {
-  return (
-      <div className='flex'>
-          <Navbar/>
-        <Outlet/>
-      </div>
-  )
-}
+  const userInfo = useSelector((state) => state.userData.user);
 
-export default Layout
+  if (!userInfo) {
+    return <Navigate to="/signin" />;
+  }
+  return (
+    <div className="flex">
+      <Navbar />
+      <Outlet />
+    </div>
+  );
+};
+
+export default Layout;
