@@ -4,7 +4,7 @@ import { FaUserGroup } from "react-icons/fa6";
 import { GrContactInfo } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlinePerson3 } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loggedUser } from "../store/slices/authSlice";
 import { NavLink, Link } from "react-router";
 
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [editable, setEditable] = useState(false);
   const updateProfileRef = useRef(null);
   const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.userData.user);
 
   const handleProfile = () => {
     if (editable) {
@@ -113,7 +114,7 @@ const Navbar = () => {
         >
           <img
             className="rounded-full w-9 h-9"
-            src="images/default.png"
+            src={userInfo.photoURL}
             alt="profile"
           />
           {editable && (

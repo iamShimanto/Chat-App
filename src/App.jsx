@@ -5,6 +5,7 @@ import Layout from "./layouts/Index"
 import Home from "./pages/Home"
 import Reset from "./pages/Reset"
 import Profile from "./pages/Profile"
+import Settigns from "./pages/Settings"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home />} />
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/settings" element={<Settigns/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

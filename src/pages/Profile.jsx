@@ -65,7 +65,7 @@ const Profile = () => {
             {userInfo.email}
           </p>
         </div>
-        <div className="email mt-5 ml-3">
+        <div className="time mt-5 ml-3">
           <p className="text-base font-medium text-secondary leading-8">Time</p>
           <p className="text-lg font-semibold text-primary leading-8">
             {time.toLocaleString("en-US", {
@@ -76,7 +76,7 @@ const Profile = () => {
             })}
           </p>
         </div>
-        <div className="email mt-5 ml-3">
+        <div className="location mt-5 ml-3">
           <p className="text-base font-medium text-secondary leading-8">
             Location
           </p>
