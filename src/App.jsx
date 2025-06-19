@@ -3,6 +3,7 @@ import Login from "./pages/Login"
 import Registration from "./pages/Registration"
 import Layout from "./layouts/Index"
 import Home from "./pages/Home"
+import Reset from "./pages/Reset"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/signin" element={<Login/>}/>
           <Route path="/signup" element={<Registration />} />
+          <Route path="/reset" element={<Reset/>}/>
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home/>}/>
           </Route>
