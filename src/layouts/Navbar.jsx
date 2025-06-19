@@ -5,8 +5,8 @@ import { GrContactInfo } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlinePerson3 } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router";
 import { loggedUser } from "../store/slices/authSlice";
+import { NavLink, Link } from "react-router";
 
 const Navbar = () => {
   const [editable, setEditable] = useState(false);
@@ -35,56 +35,77 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-nav_bg h-screen flex flex-col justify-between px-2">
-        <Link to="/">
+      <nav className="bg-nav_bg h-screen flex flex-col justify-between px-2 min-w-19 max-w-19 pt-3">
+        <NavLink to="/" className="flex justify-center">
           <img src="images/logo.png" alt="logo" />
-        </Link>
+        </NavLink>
         <div>
-          <Link
+          <NavLink
             to="/profile"
-            className="text-2xl text-icons w-full flex justify-center p-4 rounded-lg profile group relative"
+            className={({ isActive }) =>
+              `text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] ${
+                isActive ? "bg-[#3E4A56] text-brand" : "text-icons"
+              }`
+            }
           >
             <MdOutlinePerson3 />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Profile
             </div>
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/"
-            className="text-2xl w-full flex justify-center p-4 bg-[#3E4A56] text-brand rounded-lg group relative"
+            end
+            className={({ isActive }) =>
+              `text-2xl w-full flex justify-center p-4 rounded-lg group relative focus:bg-[#3E4A56] ${
+                isActive ? "bg-[#3E4A56] text-brand" : "text-icons"
+              }`
+            }
           >
             <BsChatRight />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Chats
             </div>
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/groups"
-            className="text-2xl w-full flex justify-center p-4 text-icons rounded-lg group relative"
+            className={({ isActive }) =>
+              `text-2xl w-full flex justify-center p-4 rounded-lg group relative focus:bg-[#3E4A56] ${
+                isActive ? "bg-[#3E4A56] text-brand" : "text-icons"
+              }`
+            }
           >
             <FaUserGroup />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Groups
             </div>
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/contacts"
-            className="text-2xl w-full flex justify-center p-4 text-icons rounded-lg group relative"
+            className={({ isActive }) =>
+              `text-2xl w-full flex justify-center p-4 rounded-lg group relative focus:bg-[#3E4A56] ${
+                isActive ? "bg-[#3E4A56] text-brand" : "text-icons"
+              }`
+            }
           >
             <GrContactInfo />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Contacts
             </div>
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/settings"
-            className="text-2xl w-full flex justify-center p-4 text-icons rounded-lg group relative"
+            className={({ isActive }) =>
+              `text-2xl w-full flex justify-center p-4 rounded-lg group relative focus:bg-[#3E4A56] ${
+                isActive ? "bg-[#3E4A56] text-brand" : "text-icons"
+              }`
+            }
           >
             <IoSettingsOutline />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Settings
             </div>
-          </Link>
+          </NavLink>
         </div>
         <div
           onClick={() => handleProfile()}

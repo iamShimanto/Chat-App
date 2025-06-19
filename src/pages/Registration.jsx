@@ -42,6 +42,7 @@ const Registration = () => {
               username: auth.currentUser.displayName,
               email: auth.currentUser.email,
               profile_picture: auth.currentUser.photoURL,
+              location: "Bangladesh",
             });
           });
         });

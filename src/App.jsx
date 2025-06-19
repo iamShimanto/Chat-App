@@ -4,6 +4,7 @@ import Registration from "./pages/Registration"
 import Layout from "./layouts/Index"
 import Home from "./pages/Home"
 import Reset from "./pages/Reset"
+import Profile from "./pages/Profile"
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
           <Route path="/signup" element={<Registration />} />
           <Route path="/reset" element={<Reset/>}/>
           <Route path="/" element={<Layout/>}>
-            <Route index element={<Home/>}/>
+            <Route index element={<Home />} />
+            <Route path="/profile" element={<Profile/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
