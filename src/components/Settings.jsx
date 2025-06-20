@@ -4,7 +4,6 @@ import { GoDotFill } from "react-icons/go";
 import { MdOutlinePerson3 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { getDatabase, ref, onValue } from "firebase/database";
-import ChatBox from "../components/ChatBox";
 import { FaEdit } from "react-icons/fa";
 import { getAuth, updateProfile } from "firebase/auth";
 import { loggedUser } from "../store/slices/authSlice";
@@ -188,7 +187,6 @@ const Settings = () => {
           </div>
         )}
       </div>
-      <ChatBox />
     </>
   );
 };

@@ -12,7 +12,7 @@ const Login = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userInfo = useSelector((state)=> state.userData.user)
+  const userInfo = useSelector((state) => state.userData.user);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -49,7 +49,7 @@ const Login = () => {
   };
 
   if (userInfo) {
-    return <Navigate to='/' />
+    return <Navigate to="/" />;
   }
 
   return (

@@ -4,7 +4,6 @@ import { GoDotFill } from "react-icons/go";
 import { MdOutlinePerson3 } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { getDatabase, ref, onValue } from "firebase/database";
-import ChatBox from "../components/ChatBox";
 
 const Profile = () => {
   const userInfo = useSelector((state) => state.userData.user);
@@ -84,8 +83,7 @@ const Profile = () => {
             {userData.location}
           </p>
         </div>
-          </div>
-          <ChatBox/>
+      </div>
     </>
   );
 };
