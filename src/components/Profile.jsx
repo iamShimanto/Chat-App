@@ -35,13 +35,13 @@ const Profile = () => {
         <div className="img flex justify-center my-10">
           <img
             className="w-20 h-20 rounded-full"
-            src={userInfo.photoURL}
+            src={userData.profile_picture}
             alt="profile_photo"
           />
         </div>
         <div className="username text-center">
           <h4 className="text-primary text-xl font-semibold">
-            {userInfo.displayName}
+            {userData.username}
           </h4>
           <p className="text-secondary flex justify-center items-center text-base font-medium leading-8 pb-10 border-b border-[rgba(255,255,255,0.26)]">
             <GoDotFill className="text-green-500" />
@@ -55,7 +55,7 @@ const Profile = () => {
         <div className="name mt-5 ml-3">
           <p className="text-base font-medium text-secondary leading-8">Name</p>
           <p className="text-lg font-semibold text-primary leading-8">
-            {userInfo.displayName}
+            {userData.username}
           </p>
         </div>
         <div className="email mt-5 ml-3">
@@ -63,7 +63,7 @@ const Profile = () => {
             Email
           </p>
           <p className="text-lg font-semibold text-primary leading-8">
-            {userInfo.email}
+            {userData.email}
           </p>
         </div>
         <div className="time mt-5 ml-3">
