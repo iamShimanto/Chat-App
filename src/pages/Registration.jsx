@@ -24,6 +24,7 @@ const Registration = () => {
     password: "",
   });
 
+  // ============== create user
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -68,6 +69,7 @@ const Registration = () => {
       });
   };
 
+  // ============= protection
   if (userInfo) {
     return <Navigate to="/" />;
   }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { MdOutlinePerson3 } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 import { FaEdit } from "react-icons/fa";
 import { getAuth, updateProfile } from "firebase/auth";
 import { loggedUser } from "../store/slices/authSlice";
@@ -24,6 +24,7 @@ const Settings = () => {
   });
   const auth = getAuth();
 
+  // ============== outside click event
   window.addEventListener("mousedown", (e) => {
     if (
       updateProfileRef.current &&
@@ -33,6 +34,7 @@ const Settings = () => {
     }
   });
 
+  // ============== time 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
@@ -40,6 +42,7 @@ const Settings = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // ============== database write data
   useEffect(() => {
     const starCountRef = ref(db, "users/" + userInfo.uid);
     onValue(starCountRef, (snapshot) => {
@@ -48,6 +51,7 @@ const Settings = () => {
     });
   }, []);
 
+  // ==================  update profile
   const handleUpdate = () => {
     updateProfile(auth.currentUser, {
       displayName: updataData.username || auth.currentUser.displayName,
@@ -55,6 +59,10 @@ const Settings = () => {
     })
       .then(() => {
         dispatch(loggedUser(auth.currentUser));
+        update(ref(db, "users/" + userInfo.uid), {
+          username: updataData.username || auth.currentUser.displayName,
+          profile_picture: updataData.avater || auth.currentUser.photoURL,
+        });
         setEditable(false);
         setPhotoUpdate(false);
         setUsernameUpdate(false);

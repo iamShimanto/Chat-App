@@ -18,14 +18,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userData.user);
 
-  // =============== use re ========
+  // =============== use ref ========
   const chatlistref = useRef(null);
   const chatbgref = useRef(null);
   const profileref = useRef(null);
   const profilebgref = useState(null);
   const settingsref = useRef(null);
   const settingsbgref = useRef(null);
-  // =============== use re ========
+  // =============== use ref ========
 
   // ======= click event ====
   const handleProf = () => {
@@ -71,9 +71,12 @@ const Home = () => {
     });
   };
 
+  // -============ user sign out
   const handleSignOut = () => {
     dispatch(loggedUser(null));
   };
+
+  // =========== protection
   if (!userInfo) {
     return <Navigate to="/signin" />;
   }

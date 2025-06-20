@@ -11,6 +11,7 @@ const ChatList = () => {
   const [add, setAdd] = useState(false);
   const addFriendRef = useRef(null);
 
+  // ============= add data
   const handleAdd = () => {
     const arr = [];
     onValue(ref(db, "users/"), (snapshot) => {
@@ -24,6 +25,7 @@ const ChatList = () => {
     setAdd(true);
   };
 
+  // ============= outside click event
   window.addEventListener("mousedown", (e) => {
     if (addFriendRef.current && !addFriendRef.current.contains(e.target)) {
       setAdd(false);
@@ -65,10 +67,10 @@ const ChatList = () => {
                   className={` flex justify-between items-center p-3 rounded-sm bg-slate-100 hover:scale-105 hover:shadow-sm duration-300 mb-1 add`}
                 >
                   <div className="profile flex gap-4">
-                    <div className="name">
-                      <h4
-                        className={`text-lg font-semibold cursor-pointer`}
-                      >
+                    <div className="flex items-center gap-1">
+                      <img className="w-10 h-10 rounded-full" src={item.profile_picture} alt="profile" />
+
+                      <h4 className={`text-lg font-semibold cursor-pointer`}>
                         {item.username}
                       </h4>
                     </div>

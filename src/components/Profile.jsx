@@ -11,6 +11,7 @@ const Profile = () => {
   const [userData, setUserData] = useState([]);
   const [time, setTime] = useState(new Date());
 
+  // =========== time
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
@@ -18,6 +19,7 @@ const Profile = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // ========== read data
   useEffect(() => {
     const starCountRef = ref(db, "users/" + userInfo.uid);
     onValue(starCountRef, (snapshot) => {

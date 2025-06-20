@@ -18,6 +18,7 @@ const Login = () => {
     password: "",
   });
 
+  // =========== login
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -48,6 +49,7 @@ const Login = () => {
       });
   };
 
+  // =========== protection
   if (userInfo) {
     return <Navigate to="/" />;
   }

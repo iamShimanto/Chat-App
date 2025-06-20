@@ -8,6 +8,7 @@ import { GrEmoji } from "react-icons/gr";
 const ChatBox = () => {
   const messagesEnd = useRef(null);
 
+  // ============= scroll down
   const scrollToBottom = () => {
     messagesEnd.current?.scrollIntoView({ behavior: "auto" });
   };
