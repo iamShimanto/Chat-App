@@ -3,6 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import CommonPerson from "./CommonPerson";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useSelector } from "react-redux";
+import UserList from "./UserList";
 
 const ChatList = () => {
   const db = getDatabase();
@@ -62,23 +63,7 @@ const ChatList = () => {
                 placeholder="Search"
               />
               {data.map((item) => (
-                <div
-                  key={item.id}
-                  className={` flex justify-between items-center p-3 rounded-sm bg-slate-100 hover:scale-105 hover:shadow-sm duration-300 mb-1 add`}
-                >
-                  <div className="profile flex gap-4">
-                    <div className="flex items-center gap-1">
-                      <img className="w-10 h-10 rounded-full" src={item.profile_picture} alt="profile" />
-
-                      <h4 className={`text-lg font-semibold cursor-pointer`}>
-                        {item.username}
-                      </h4>
-                    </div>
-                  </div>
-                  <button className="add px-3 py-1.5 cursor-pointer !rounded-lg">
-                    Add
-                  </button>
-                </div>
+                <UserList key={item.id} data={item}/>
               ))}
             </div>
           )}
