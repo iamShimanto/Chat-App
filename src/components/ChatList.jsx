@@ -63,7 +63,7 @@ const ChatList = () => {
                 placeholder="Search"
               />
               {data.map((item) => (
-                <UserList key={item.id} data={item}/>
+                <UserList key={item} data={item}/>
               ))}
             </div>
           )}

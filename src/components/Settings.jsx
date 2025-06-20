@@ -100,7 +100,7 @@ const Settings = () => {
         </div>
         <div className="flex items-center mt-10 text-primary gap-3 text-xl font-semibold">
           <MdOutlinePerson3 />
-          About
+          Personal Info
         </div>
         <div className="name mt-5 ml-3">
           <p className="text-base font-medium text-secondary leading-8">Name</p>

@@ -13,7 +13,6 @@ const UserList = ({ data }) => {
               src={data.profile_picture}
               alt="profile"
             />
-
             <h4 className={`text-lg font-semibold cursor-pointer`}>
               {data.username}
             </h4>
