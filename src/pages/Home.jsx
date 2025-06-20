@@ -18,7 +18,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userData.user);
 
-  console.log(userInfo);
   // =============== use re ========
   const chatlistref = useRef(null);
   const chatbgref = useRef(null);
