@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
 
 const Reset = () => {
+  const auth = getAuth();
+  const [userEmail, setUserEmail] = useState();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    sendPasswordResetEmail(auth, userEmail)
+      .then(() => {
+        toast.success("Password reset Email sent Successfully!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+      });
   };
 
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-[#0F1012] px-4">
+        <ToastContainer position="top-right" autoClose={5000} />
         <div className="bg-[#16181C] p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all hover:scale-[1.01]">
           <div className="mb-8 text-center">
             <h2 className="text-4xl font-bold text-[#7289DA] mb-2">
@@ -21,6 +35,7 @@ const Reset = () => {
             <div className="relative group">
               <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#99AAB5] group-hover:text-[#7289DA] transition-colors" />
               <input
+                onChange={(e) => setUserEmail(e.target.value)}
                 type="email"
                 name="email"
                 placeholder="Email Address"
