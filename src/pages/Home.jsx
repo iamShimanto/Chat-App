@@ -22,7 +22,7 @@ const Home = () => {
   const chatlistref = useRef(null);
   const chatbgref = useRef(null);
   const profileref = useRef(null);
-  const profilebgref = useState(null);
+  const profilebgref = useRef(null);
   const settingsref = useRef(null);
   const settingsbgref = useRef(null);
   // =============== use ref ========

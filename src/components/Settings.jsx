@@ -11,6 +11,7 @@ import { loggedUser } from "../store/slices/authSlice";
 const Settings = () => {
   const userInfo = useSelector((state) => state.userData.user);
   const db = getDatabase();
+  const auth = getAuth();
   const updateProfileRef = useRef(null);
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
@@ -22,7 +23,6 @@ const Settings = () => {
     avater: "",
     username: "",
   });
-  const auth = getAuth();
 
   // ============== outside click event
   window.addEventListener("mousedown", (e) => {
