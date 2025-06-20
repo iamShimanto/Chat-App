@@ -2,22 +2,22 @@
 
 @theme {
   --color-nav_bg: #36404a;
-  --color-primary : #EFF2F7;
-  --color-secondary : #ABB4D2;
-  --color-icons : #A6B0CF;
-  --color-brand : #7269EF;
+  --color-primary: #eff2f7;
+  --color-secondary: #abb4d2;
+  --color-icons: #a6b0cf;
+  --color-brand: #7269ef;
 }
 
 * {
   font-family: "Public Sans", sans-serif;
 }
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   display: none;
 }
 body {
   background-color: #303841;
 }
-Link:active{
+Link:active {
   background: #000;
 }
 
