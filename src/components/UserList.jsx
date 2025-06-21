@@ -33,7 +33,7 @@ const UserList = ({ data }) => {
         </button>
       </div>
       {show && (
-        <div className="w-75 h-60 rounded-2xl bg-slate-50 py-10 my-2 mx-auto add">
+        <div className="w-75 h-60 overflow-y-auto rounded-2xl bg-slate-50 py-5 my-2 mx-auto add">
           <img
             className="w-20 h-20  rounded-full mx-auto"
             src={data.profile_picture}
