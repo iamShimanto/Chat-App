@@ -55,16 +55,18 @@ const ChatList = () => {
           {add && (
             <div
               ref={addFriendRef}
-              className="bg-[#1a1d21] p-10 absolute top-0 left-0 z-10 w-full h-120 rounded-2xl add"
+              className="bg-[#1a1d21] py-10 absolute top-0 left-0 z-10 w-full h-120 rounded-2xl add "
             >
               <input
-                className=" outline-none w-full bg-transparent text-[#fff] placeholder-[#3680b1] pb-3 border-b mb-3 tracking-widest"
+                className=" outline-none w-full bg-transparent text-[#fff] placeholder-[#3680b1] pb-3 border-b mb-3 tracking-widest px-10"
                 type="text"
                 placeholder="Search"
               />
-              {data.map((item) => (
-                <UserList key={item} data={item}/>
-              ))}
+              <div className="overflow-y-auto h-90 w-full p-5">
+                {data.map((item) => (
+                  <UserList key={item.id} data={item} />
+                ))}
+              </div>
             </div>
           )}
         </div>
