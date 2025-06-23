@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import { useSelector } from "react-redux";
 
 const UserList = ({ data }) => {
   const [show, setShow] = useState(false);
+  const db = getDatabase();
+  const userInfo = useSelector((state) => state.userData.user);
+  const [friendList, setFriendList] = useState([])
 
   const handleUser = () => {
     if (!show) {
@@ -10,6 +15,29 @@ const UserList = ({ data }) => {
       setShow(false);
     }
   };
+
+  const handleAdd = () => {
+    set(
+      push(ref(db, "friendList/"), {
+        creatorName: userInfo.displayName,
+        creatorId: userInfo.uid,
+        creatorAvater: userInfo.photoURL,
+        paricipantName: data.username,
+        participantId: data.id,
+        participantAvater: data.profile_picture,
+      })
+    );
+  };
+
+  useEffect(() => {
+    onValue(ref(db, "friendList/"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().creatorId + item.val().participantId);
+      });
+      setFriendList(arr)
+    });
+  }, []);
 
   return (
     <>
@@ -28,9 +56,18 @@ const UserList = ({ data }) => {
             </h4>
           </div>
         </div>
-        <button className="add px-3 py-1.5 cursor-pointer !rounded-lg">
+        {
+          friendList.includes(data.id + userInfo.uid) || friendList.includes(userInfo.uid + data.id)
+            ?
+            <p className="text-green-500">Friend</p>
+            :
+        <button
+          onClick={handleAdd}
+          className="add px-3 py-1.5 cursor-pointer !rounded-lg"
+        >
           Add
         </button>
+        }
       </div>
       {show && (
         <div className="w-75 h-60 overflow-y-auto rounded-2xl bg-slate-50 py-5 my-2 mx-auto add">
