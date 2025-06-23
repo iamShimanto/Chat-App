@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import CommonPerson from "./CommonPerson";
 import { getDatabase, onValue, ref } from "firebase/database";
@@ -11,6 +11,7 @@ const ChatList = () => {
   const [data, setData] = useState([]);
   const [add, setAdd] = useState(false);
   const addFriendRef = useRef(null);
+  const [friendList, setFriendList] = useState([]);
 
   // ============= add data
   const handleAdd = () => {
@@ -33,6 +34,15 @@ const ChatList = () => {
     }
   });
 
+  useEffect(() => {
+    onValue(ref(db, "friendList"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push({ ...item.val(), id: item.key });
+      });
+      setFriendList(arr);
+    });
+  }, []);
   return (
     <>
       <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
@@ -74,123 +84,33 @@ const ChatList = () => {
           Recent
         </div>
         <div className="person overflow-y-auto h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
-          <CommonPerson
-            image="images/default.png"
-            name="Naruto Uzumaki"
-            message="I Hate You"
-            time="12 : 30 am"
-            styling="bg-[#1A1D21]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Kakashi Hatake"
-            message="Slap You...."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Monkey D. Luffy"
-            message="Faull........"
-            time="12 : 30 am"
-            styling="bg-[#1A1D21]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Madara Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Eren Yeager"
-            message="Love You ....."
-            time="12 : 30 am"
-            styling="bg-[#1A1D21]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Manjiro Sano Mikey"
-            message="Slap You ...."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Giyu Tomioka"
-            message="Faull........"
-            time="12 : 30 am"
-            styling="bg-[#1A1D21]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Sasuke Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Sasuke Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Sasuke Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Sasuke Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Sasuke Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
-          <CommonPerson
-            image="images/default.png"
-            name="Sasuke Uchiha"
-            message="Need Money ....."
-            time="12 : 30 am"
-            styling="bg-[#1E2124]"
-            stylingName="text-white"
-            stylingMessage="text-[#99AAB5]"
-          />
+          {friendList.map(
+            (item) =>
+              (item.creatorId == userInfo.uid && (
+                <CommonPerson
+                  key={item.id}
+                  name={item.paricipantName}
+                  avater={item.participantAvater}
+                  id={item.participantId}
+                  time="12 : 30 am"
+                  styling="bg-[#1A1D21]"
+                  stylingName="text-white"
+                  stylingMessage="text-[#99AAB5]"
+                />
+              )) ||
+              (item.participantId == userInfo.uid && (
+                <CommonPerson
+                  key={item.id}
+                  name={item.creatorName}
+                  avater={item.creatorAvater}
+                  id={item.creatorId}
+                  time="12 : 30 am"
+                  styling="bg-[#1A1D21]"
+                  stylingName="text-white"
+                  stylingMessage="text-[#99AAB5]"
+                />
+              ))
+          )}
         </div>
       </div>
     </>

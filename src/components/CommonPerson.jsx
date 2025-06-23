@@ -1,9 +1,8 @@
 import React from "react";
 
 const CommonPerson = ({
-  image,
+  avater,
   name,
-  message,
   time,
   styling = "bg-white",
   stylingName = "text-black22",
@@ -15,12 +14,11 @@ const CommonPerson = ({
         className={`${styling} flex justify-between p-3 rounded-sm cursor-pointer hover:scale-105 hover:shadow-sm duration-300 mb-1 bg-[#262e35]`}
       >
         <div className="profile flex gap-4">
-          <img className="w-12 h-12 rounded-full" src={image} alt="logo" />
+          <img className="w-12 h-12 rounded-full" src={avater} alt="logo" />
           <div className="name">
             <h4 className={`${stylingName} text-lg font-semibold font-inter`}>
               {name}
             </h4>
-            <p className={`${stylingMessage}`}>{message}</p>
           </div>
         </div>
         <p className={`${stylingMessage}`}>{time}</p>

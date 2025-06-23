@@ -18,7 +18,7 @@ const UserList = ({ data }) => {
 
   const handleAdd = () => {
     set(
-      push(ref(db, "friendList/"), {
+      push(ref(db, "friendList"), {
         creatorName: userInfo.displayName,
         creatorId: userInfo.uid,
         creatorAvater: userInfo.photoURL,
