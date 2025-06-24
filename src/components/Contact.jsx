@@ -17,7 +17,7 @@ const Contact = () => {
       setFriendList(arr);
     });
   }, []);
-    
+
   return (
     <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
       <h2 className="text-4xl text-white font-semibold ml-10 mt-10">

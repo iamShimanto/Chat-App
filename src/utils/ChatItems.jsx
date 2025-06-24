@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const ChatItems = ({
   avater,
   name,
@@ -8,10 +7,6 @@ const ChatItems = ({
   stylingName = "text-black22",
   time,
 }) => {
-
-
-
-
   return (
     <>
       <div

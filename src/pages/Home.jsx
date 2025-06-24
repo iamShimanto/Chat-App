@@ -89,7 +89,7 @@ const Home = () => {
     profileref.current.style = "display : none;";
     settingsref.current.style = "display : none;";
     requestRef.current.style = "display : none";
-    ContactRef.current.style = "display : block"
+    ContactRef.current.style = "display : block";
     profilebgref.current.style = "background-color: transparent;";
     chatbgref.current.style = "background-color: transparent;";
     settingsbgref.current.style = "background-color: transparent;";
