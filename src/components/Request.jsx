@@ -22,8 +22,8 @@ const Request = () => {
 
     return (
         <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
-            <h2 className='text-4xl text-white font-semibold ml-10 mt-10'>{show ? "All Sent Request" : "All Request"}</h2>
-            <button onClick={() => show ? setShow(false) : setShow(true)} className='text-base text-[rgba(255,255,255,0.40)] ml-10 mt-2 cursor-pointer hover:underline duration-300 hover:text-gray-300'>{show ? "See All Request" : "See Sent Request"}</button>
+            <h2 className='text-4xl text-white font-semibold ml-10 mt-10'>{show ? "Sent Request" : "Friend Request"}</h2>
+            <button onClick={() => show ? setShow(false) : setShow(true)} className='text-base text-[rgba(255,255,255,0.40)] ml-10 mt-2 cursor-pointer hover:underline duration-300 hover:text-gray-300'>{show ? "See Friend Request" : "See Sent Request"}</button>
 
             {
                 !show &&
