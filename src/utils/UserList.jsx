@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import { useSelector } from "react-redux";
 
@@ -6,7 +6,8 @@ const UserList = ({ data }) => {
   const [show, setShow] = useState(false);
   const db = getDatabase();
   const userInfo = useSelector((state) => state.userData.user);
-  const [friendList, setFriendList] = useState([])
+  const [requestList, setRequestList] = useState([]);
+  const reqRef = useRef(null);
 
   const handleUser = () => {
     if (!show) {
@@ -17,32 +18,33 @@ const UserList = ({ data }) => {
   };
 
   const handleAdd = () => {
-    set(
-      push(ref(db, "friendList"), {
-        creatorName: userInfo.displayName,
-        creatorId: userInfo.uid,
-        creatorAvater: userInfo.photoURL,
-        paricipantName: data.username,
-        participantId: data.id,
-        participantAvater: data.profile_picture,
-      })
-    );
+    set(push(ref(db, "requestList/")), {
+      creatorName: userInfo.displayName,
+      creatorId: userInfo.uid,
+      creatorAvater: userInfo.photoURL,
+      creatorEmail: userInfo.email,
+      participantName: data.username,
+      participantId: data.id,
+      participantAvater: data.profile_picture,
+      participantEmail: data.email,
+    });
   };
 
   useEffect(() => {
-    onValue(ref(db, "friendList/"), (snapshot) => {
+    onValue(ref(db, "requestList/"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
         arr.push(item.val().creatorId + item.val().participantId);
       });
-      setFriendList(arr)
+      setRequestList(arr);
     });
   }, []);
 
   return (
     <>
       <div
-        className={` flex justify-between items-center p-3 rounded-sm bg-slate-100 hover:scale-105 hover:shadow-sm duration-300 mb-1 add`}
+        ref={reqRef}
+        className={`flex justify-between items-center p-3 rounded-sm bg-slate-100 hover:scale-105 hover:shadow-sm duration-300 mb-1 add`}
       >
         <div onClick={() => handleUser()} className="profile flex gap-4">
           <div className="flex items-center gap-1">
@@ -56,18 +58,17 @@ const UserList = ({ data }) => {
             </h4>
           </div>
         </div>
-        {
-          friendList.includes(data.id + userInfo.uid) || friendList.includes(userInfo.uid + data.id)
-            ?
-            <p className="text-green-500">Friend</p>
-            :
-        <button
-          onClick={handleAdd}
-          className="add px-3 py-1.5 cursor-pointer !rounded-lg"
-        >
-          Add
-        </button>
-        }
+        {requestList.includes(data.id + userInfo.uid) ||
+        requestList.includes(userInfo.uid + data.id) ? (
+          (reqRef.current.style = "display : none;")
+        ) : (
+          <button
+            onClick={handleAdd}
+            className="add px-3 py-1.5 cursor-pointer !rounded-lg"
+          >
+            Add
+          </button>
+        )}
       </div>
       {show && (
         <div className="w-75 h-60 overflow-y-auto rounded-2xl bg-slate-50 py-5 my-2 mx-auto add">

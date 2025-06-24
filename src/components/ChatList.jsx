@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import CommonPerson from "./CommonPerson";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useSelector } from "react-redux";
-import UserList from "./UserList";
+import UserList from "../utils/UserList";
+import FriendItem from "../utils/FriendItem";
 
 const ChatList = () => {
   const db = getDatabase();
@@ -19,7 +19,16 @@ const ChatList = () => {
     onValue(ref(db, "users/"), (snapshot) => {
       snapshot.forEach((item) => {
         if (item.key !== userInfo.uid) {
-          arr.push({ ...item.val(), id: item.key });
+          const isFriend = friendList.find(
+            (friend) =>
+              (friend.creatorId == userInfo.uid &&
+                friend.participantId === item.key) ||
+              (friend.participantId == userInfo.uid &&
+                friend.creatorId == item.key)
+          );
+          if (!isFriend) {
+            arr.push({ ...item.val(), id: item.key });
+          }
         }
       });
       setData(arr);
@@ -43,6 +52,7 @@ const ChatList = () => {
       setFriendList(arr);
     });
   }, []);
+
   return (
     <>
       <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
@@ -87,10 +97,11 @@ const ChatList = () => {
           {friendList.map(
             (item) =>
               (item.creatorId == userInfo.uid && (
-                <CommonPerson
+                <FriendItem
                   key={item.id}
-                  name={item.paricipantName}
+                  name={item.participantName}
                   avater={item.participantAvater}
+                  email={item.participantEmail}
                   id={item.participantId}
                   time="12 : 30 am"
                   styling="bg-[#1A1D21]"
@@ -99,15 +110,15 @@ const ChatList = () => {
                 />
               )) ||
               (item.participantId == userInfo.uid && (
-                <CommonPerson
+                <FriendItem
                   key={item.id}
                   name={item.creatorName}
                   avater={item.creatorAvater}
+                  email={item.creatorEmail}
                   id={item.creatorId}
                   time="12 : 30 am"
                   styling="bg-[#1A1D21]"
                   stylingName="text-white"
-                  stylingMessage="text-[#99AAB5]"
                 />
               ))
           )}

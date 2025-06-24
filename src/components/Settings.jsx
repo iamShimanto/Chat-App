@@ -23,6 +23,17 @@ const Settings = () => {
     avater: "",
     username: "",
   });
+  const [friendList, setFriendList] = useState([]);
+
+  useEffect(() => {
+    onValue(ref(db, "friendList"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push({ ...item.val(), id: item.key });
+      });
+      setFriendList(arr);
+    });
+  }, []);
 
   // ============== outside click event
   window.addEventListener("mousedown", (e) => {
@@ -34,7 +45,7 @@ const Settings = () => {
     }
   });
 
-  // ============== time 
+  // ============== time
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
@@ -58,11 +69,31 @@ const Settings = () => {
       photoURL: updataData.avater || auth.currentUser.photoURL,
     })
       .then(() => {
-        dispatch(loggedUser(auth.currentUser));
+        const updatedUsername =
+          updataData.username || auth.currentUser.displayName;
+        const updatedAvater = updataData.avater || auth.currentUser.photoURL;
+
         update(ref(db, "users/" + userInfo.uid), {
-          username: updataData.username || auth.currentUser.displayName,
-          profile_picture: updataData.avater || auth.currentUser.photoURL,
+          username: updatedUsername,
+          profile_picture: updatedAvater,
         });
+        dispatch(loggedUser(auth.currentUser));
+
+        friendList.forEach((item) => {
+          const itemRef = ref(db, "friendList/" + item.id);
+          if (item.creatorId === userInfo.uid) {
+            update(itemRef, {
+              creatorName: updatedUsername,
+              creatorAvater: updatedAvater,
+            });
+          } else if (item.participantId === userInfo.uid) {
+            update(itemRef, {
+              participantName: updatedUsername,
+              participantAvater: updatedAvater,
+            });
+          }
+        });
+
         setEditable(false);
         setPhotoUpdate(false);
         setUsernameUpdate(false);

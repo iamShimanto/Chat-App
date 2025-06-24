@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { BsChatRight } from "react-icons/bs";
-import { FaUserGroup } from "react-icons/fa6";
+import { FaUserGroup, FaUserPlus } from "react-icons/fa6";
 import { GrContactInfo } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlinePerson3 } from "react-icons/md";
@@ -11,6 +11,8 @@ import ChatList from "../components/ChatList";
 import ChatBox from "../components/ChatBox";
 import Profile from "../components/Profile";
 import Settings from "../components/Settings";
+import Request from "../components/Request";
+import Contact from "../components/Contact";
 
 const Home = () => {
   const [editable, setEditable] = useState(false);
@@ -22,9 +24,15 @@ const Home = () => {
   const chatlistref = useRef(null);
   const chatbgref = useRef(null);
   const profileref = useRef(null);
+  const requestRef = useRef(null);
+  const ContactRef = useRef(null);
+
+  // ============ bg ref
   const profilebgref = useRef(null);
   const settingsref = useRef(null);
   const settingsbgref = useRef(null);
+  const requestbgRef = useRef(null);
+  const ContactBgRef = useRef(null);
   // =============== use ref ========
 
   // ======= click event ====
@@ -32,25 +40,61 @@ const Home = () => {
     chatlistref.current.style = "display : none;";
     profileref.current.style = "display : block;";
     settingsref.current.style = "display : none;";
+    requestRef.current.style = "display : none;";
+    ContactRef.current.style = "display : none";
     profilebgref.current.style = "background-color: #7269EF;";
     chatbgref.current.style = "background-color: transparent;";
     settingsbgref.current.style = "background-color: transparent;";
+    requestbgRef.current.style = "background-color: transparent;";
+    ContactBgRef.current.style = "background-color: transparent;";
   };
   const hancleChat = () => {
     chatlistref.current.style = "display : block;";
     profileref.current.style = "display : none;";
     settingsref.current.style = "display : none;";
+    requestRef.current.style = "display : none;";
+    ContactRef.current.style = "display : none";
     profilebgref.current.style = "background-color: transparent;";
     chatbgref.current.style = "background-color: #7269EF;";
     settingsbgref.current.style = "background-color: transparent;";
+    requestbgRef.current.style = "background-color: transparent;";
+    ContactBgRef.current.style = "background-color: transparent;";
   };
   const handleSett = () => {
     chatlistref.current.style = "display : none;";
     profileref.current.style = "display : none;";
+    requestRef.current.style = "display : none;";
     settingsref.current.style = "display : block;";
+    ContactRef.current.style = "display : none";
     profilebgref.current.style = "background-color: transparent;";
     chatbgref.current.style = "background-color: transparent;";
+    requestbgRef.current.style = "background-color: transparent;";
     settingsbgref.current.style = "background-color: #7269EF;";
+    ContactBgRef.current.style = "background-color: transparent;";
+  };
+  const handleReq = () => {
+    chatlistref.current.style = "display : none;";
+    profileref.current.style = "display : none;";
+    settingsref.current.style = "display : none;";
+    requestRef.current.style = "display : block";
+    ContactRef.current.style = "display : none";
+    profilebgref.current.style = "background-color: transparent;";
+    chatbgref.current.style = "background-color: transparent;";
+    settingsbgref.current.style = "background-color: transparent;";
+    requestbgRef.current.style = "background-color: #7269EF;";
+    ContactBgRef.current.style = "background-color: transparent;";
+  };
+  const handleContact = () => {
+    chatlistref.current.style = "display : none;";
+    profileref.current.style = "display : none;";
+    settingsref.current.style = "display : none;";
+    requestRef.current.style = "display : none";
+    ContactRef.current.style = "display : block"
+    profilebgref.current.style = "background-color: transparent;";
+    chatbgref.current.style = "background-color: transparent;";
+    settingsbgref.current.style = "background-color: transparent;";
+    requestbgRef.current.style = "background-color: transparent;";
+    ContactBgRef.current.style = "background-color: #7269EF;";
   };
 
   // ======= click event ====
@@ -114,10 +158,24 @@ const Home = () => {
               Groups
             </div>
           </div>
-          <div className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer">
+          <div
+            onClick={handleContact}
+            ref={ContactBgRef}
+            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+          >
             <GrContactInfo />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Contacts
+            </div>
+          </div>
+          <div
+            onClick={handleReq}
+            ref={requestbgRef}
+            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+          >
+            <FaUserPlus />
+            <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
+              Requests
             </div>
           </div>
           <div
@@ -176,6 +234,12 @@ const Home = () => {
       </div>
       <div ref={settingsref} className="hidden">
         <Settings />
+      </div>
+      <div ref={requestRef} className="hidden">
+        <Request />
+      </div>
+      <div ref={ContactRef} className="hidden">
+        <Contact />
       </div>
       <div className="w-full">
         <ChatBox />
