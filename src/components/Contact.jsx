@@ -31,6 +31,7 @@ const Contact = () => {
                 key={item.id}
                 name={item.participantName}
                 avater={item.participantAvater}
+                email={item.participantEmail}
                 id={item.participantId}
                 time="12 : 30 am"
                 styling="bg-[#1A1D21] add px-5"
@@ -43,6 +44,7 @@ const Contact = () => {
                 key={item.id}
                 name={item.creatorName}
                 avater={item.creatorAvater}
+                email={item.creatorEmail}
                 id={item.creatorId}
                 time="12 : 30 am"
                 styling="bg-[#1A1D21] add px-5"

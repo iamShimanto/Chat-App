@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useSelector } from "react-redux";
 import UserList from "../utils/UserList";
-import FriendItem from "../utils/FriendItem";
+import ChatItems from "../utils/ChatItems";
 
 const ChatList = () => {
   const db = getDatabase();
@@ -97,7 +97,7 @@ const ChatList = () => {
           {friendList.map(
             (item) =>
               (item.creatorId == userInfo.uid && (
-                <FriendItem
+                <ChatItems
                   key={item.id}
                   name={item.participantName}
                   avater={item.participantAvater}
@@ -110,7 +110,7 @@ const ChatList = () => {
                 />
               )) ||
               (item.participantId == userInfo.uid && (
-                <FriendItem
+                <ChatItems
                   key={item.id}
                   name={item.creatorName}
                   avater={item.creatorAvater}
