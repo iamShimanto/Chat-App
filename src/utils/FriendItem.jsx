@@ -1,16 +1,17 @@
+import { getDatabase, ref, remove } from "firebase/database";
 import React, { useState } from "react";
-
 
 const FriendItem = ({
   avater,
   name,
   email,
+  id,
   styling = "bg-white",
   stylingName = "text-black22",
   time,
 }) => {
-
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const db = getDatabase();
 
   const handleShow = () => {
     if (!show) {
@@ -18,8 +19,11 @@ const FriendItem = ({
     } else {
       setShow(false);
     }
-  }
+  };
 
+  const handleRemove = () => {
+    remove(ref(db, "friendList/" + id));
+  };
 
   return (
     <>
@@ -44,12 +48,20 @@ const FriendItem = ({
             src={avater}
             alt="profile"
           />
-          <h4 className="text-center text-black text-2xl tracking-widest font-semibold my-3">
+          <h4 className="text-center text-black text-2xl tracking-widest font-semibold my-2">
             {name}
           </h4>
           <p className="text-center text-[rgba(0,0,0,0.61)] font-semibold my-2 text-2xl">
             {email}
           </p>
+          <div className="flex justify-center">
+            <button
+              onClick={handleRemove}
+              className="text-white px-4 py-2 bg-red-400 cursor-pointer rounded-lg hover:bg-red-500 ease-in-out duration-300"
+            >
+              Remove Friend
+            </button>
+          </div>
         </div>
       )}
     </>
