@@ -25,6 +25,7 @@ const Settings = () => {
   });
   const [friendList, setFriendList] = useState([]);
 
+  // ============== friend list data
   useEffect(() => {
     onValue(ref(db, "friendList"), (snapshot) => {
       let arr = [];
