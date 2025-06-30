@@ -1,21 +1,47 @@
-import React, { useEffect, useRef } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoCallOutline, IoSend, IoVideocamOutline } from "react-icons/io5";
-import MessageCard from "../utils/MessageCard";
-import { RiGalleryLine } from "react-icons/ri";
+import React, { useEffect, useState } from "react";
+import { IoSend } from "react-icons/io5";
 import { GrEmoji } from "react-icons/gr";
+import { useSelector } from "react-redux";
+import { getDatabase, onValue, push, ref, set } from "firebase/database";
 
 const ChatBox = () => {
-  const messagesEnd = useRef(null);
+  const userInfo = useSelector((state) => state.userData.user);
+  const activeFriend = useSelector((state) => state.activeFriend.friend);
+  const db = getDatabase();
+  const [messageContent, setMessageContent] = useState("");
+  const [message, setMessage] = useState([]);
 
-  // ============= scroll down
-  const scrollToBottom = () => {
-    messagesEnd.current?.scrollIntoView({ behavior: "auto" });
+  // ============ write message
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
+    if (messageContent) {
+      set(push(ref(db, "messages/")), {
+        senderId: userInfo.uid,
+        recieverId: activeFriend.id,
+        message: messageContent,
+      });
+    }
+    setMessageContent("");
   };
 
+  // ============ read message
   useEffect(() => {
-    scrollToBottom();
-  }, []);
+    onValue(ref(db, "messages"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (
+          (item.val().senderId === userInfo.uid ||
+            item.val().recieverId === userInfo.uid) &
+          (item.val().senderId === activeFriend.id ||
+            item.val().recieverId === activeFriend.id)
+        ) {
+          arr.push({ ...item.val(), id: item.key });
+        }
+        setMessage(arr);
+      });
+    });
+  }, [activeFriend]);
 
   return (
     <>
@@ -24,38 +50,47 @@ const ChatBox = () => {
           <div className="flex items-center gap-4 cursor-pointer">
             <img
               className="h-12 w-12 rounded-full"
-              src="images/default.png"
+              src={activeFriend.avater}
               alt="logo"
             />
             <h5 className="text-lg font-semibold font-inter text-white">
-              Naruto Uzumaki
+              {activeFriend.name}
             </h5>
           </div>
         </div>
-        <div className="message overflow-y-auto h-[calc(100vh-180px)]">
-          <MessageCard message1="Hi" message2="Hlw" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <MessageCard message1="Hi" message2="Hlw" styling="mt-17" />
-          <div ref={messagesEnd} />
+        <div className="message overflow-y-auto h-[calc(100vh-180px)] px-2">
+          <div className="flex flex-col gap-5 pb-10 my-2">
+            {message.map((item) =>
+              item.senderId === userInfo.uid ? (
+                <p className="px-4 py-2 bg-nav_bg w-fit text-primary rounded-xl rounded-br-none max-w-4/5 ml-auto">
+                  {item.message}
+                </p>
+              ) : (
+                <p className="px-4 py-2 bg-brand w-fit text-primary rounded-xl rounded-bl-none max-w-4/5">
+                  {item.message}
+                </p>
+              )
+            )}
+          </div>
         </div>
-        <div className="mt-2 ml-4 mr-6 bg-nav_bg px-3 py-4 flex items-center rounded-lg">
+        <form
+          onSubmit={handleSendMessage}
+          className="mt-2 ml-4 mr-6 bg-nav_bg px-3 py-4 flex items-center rounded-lg"
+        >
           <input
+            onChange={(e) => setMessageContent(e.target.value)}
+            value={messageContent}
             className="w-full outline-none rounded-md pl-3 text-base font-normal font-inter text-white bg-transparent placeholder-[#99AAB5]"
             type="text"
             placeholder="Text Here"
           />
           <div className="emoji flex items-center gap-3 text-2xl text-[#99AAB5]">
             <GrEmoji className="cursor-pointer hover:text-[#7289DA] duration-300" />
-            <RiGalleryLine className="cursor-pointer hover:text-[#7289DA] duration-300" />
-            <IoSend className="cursor-pointer hover:text-[#7289DA] duration-300" />
+            <button>
+              <IoSend className="cursor-pointer hover:text-[#7289DA] duration-300" />
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

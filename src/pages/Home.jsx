@@ -13,12 +13,14 @@ import Profile from "../components/Profile";
 import Settings from "../components/Settings";
 import Request from "../components/Request";
 import Contact from "../components/Contact";
+import { FiMessageSquare } from "react-icons/fi";
 
 const Home = () => {
   const [editable, setEditable] = useState(false);
   const updateProfileRef = useRef(null);
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userData.user);
+  const activeFriend = useSelector((state) => state.activeFriend.friend);
 
   // =============== use ref ========
   const chatlistref = useRef(null);
@@ -226,7 +228,7 @@ const Home = () => {
           )}
         </div>
       </nav>
-      <div className="" ref={chatlistref}>
+      <div className="border-r border-nav_bg" ref={chatlistref}>
         <ChatList />
       </div>
       <div ref={profileref} className="hidden">
@@ -242,7 +244,16 @@ const Home = () => {
         <Contact />
       </div>
       <div className="w-full">
-        <ChatBox />
+        {activeFriend ? (
+          <ChatBox />
+        ) : (
+          <div className="flex justify-center items-center h-screen flex-col gap-4">
+            <div className="icons w-30 h-30 bg-icons rounded-full flex justify-center items-center text-5xl text-primary">
+              <FiMessageSquare />
+            </div>
+            <p className="px-4 py-2 bg-icons rounded-full text-xl font-bold text-primary">Start Conversation</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -17,7 +17,6 @@ const Settings = () => {
   const [userData, setUserData] = useState([]);
   const [time, setTime] = useState(new Date());
   const [editable, setEditable] = useState(false);
-  const [photoUpdate, setPhotoUpdate] = useState(false);
   const [usernameUpdate, setUsernameUpdate] = useState(false);
   const [updataData, setUpdataData] = useState({
     avater: "",
@@ -96,7 +95,6 @@ const Settings = () => {
         });
 
         setEditable(false);
-        setPhotoUpdate(false);
         setUsernameUpdate(false);
       })
       .catch((error) => {
@@ -113,12 +111,6 @@ const Settings = () => {
             className="w-20 h-20 rounded-full"
             src={userData.profile_picture}
             alt="profile_photo"
-          />
-          <FaEdit
-            onClick={() => {
-              setEditable(true), setPhotoUpdate(true), setUsernameUpdate(false);
-            }}
-            className="text-2xl text-primary cursor-pointer hover:text-brand duration-300 -translate-x-1"
           />
         </div>
         <div className="username text-center">
@@ -140,9 +132,7 @@ const Settings = () => {
             {userData.username}
             <FaEdit
               onClick={() => {
-                setEditable(true),
-                  setUsernameUpdate(true),
-                  setPhotoUpdate(false);
+                setEditable(true), setUsernameUpdate(true);
               }}
               className="text-2xl text-primary cursor-pointer hover:text-brand"
             />
@@ -181,20 +171,6 @@ const Settings = () => {
             ref={updateProfileRef}
           >
             <div className=" flex flex-col items-center w-77 h-60 p-10 rounded">
-              {photoUpdate && (
-                <input
-                  onChange={(e) =>
-                    setUpdataData((prev) => ({
-                      ...prev,
-                      avater: e.target.value,
-                    }))
-                  }
-                  type="text"
-                  placeholder="Edit Your PhotoURL"
-                  className={`w-full pl-10 pr-4 py-4 bg-[#1E2124] border-2  "border-[#2C2F33]"
-              rounded-lg text-white placeholder-[#99AAB5] focus:outline-none focus:border-[#7289DA] transition-all hover:border-[#7289DA] mb-2`}
-                />
-              )}
               {usernameUpdate && (
                 <input
                   onChange={(e) =>
