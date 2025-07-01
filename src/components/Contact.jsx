@@ -19,11 +19,11 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
+    <div className=" pt-5 h-[calc(100vh-70px)] lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35]">
       <h2 className="text-4xl text-white font-semibold ml-10 mt-10">
         FriendList
       </h2>
-      <div className="person overflow-y-auto h-[calc(100vh-140px)] overflow-x-hidden bg-[#303841] mt-10">
+      <div className="person overflow-y-auto h-[calc(100vh-230px)] lg:h-[calc(100vh-140px)] overflow-x-hidden bg-[#303841] mt-10">
         {friendList.map(
           (item) =>
             (item.creatorId == userInfo.uid && (

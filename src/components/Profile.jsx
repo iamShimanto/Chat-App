@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35] p-4">
+      <div className=" pt-5 h-[calc(100vh-70px)] lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35] p-4">
         <h2 className="text-2xl text-primary font-semibold">My Profile</h2>
         <div className="img flex justify-center my-10">
           <img

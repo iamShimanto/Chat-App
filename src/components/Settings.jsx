@@ -104,7 +104,7 @@ const Settings = () => {
 
   return (
     <>
-      <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35] p-4 relative">
+      <div className=" pt-5 h-[calc(100vh-70px)] lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35] p-4 relative">
         <h2 className="text-2xl text-primary font-semibold">Settings</h2>
         <div className="img flex justify-center my-10">
           <img

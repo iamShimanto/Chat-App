@@ -20,7 +20,7 @@ const Request = () => {
   }, []);
 
   return (
-    <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
+    <div className=" pt-5 h-full lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35]">
       <h2 className="text-4xl text-white font-semibold ml-10 mt-10">
         {show ? "Sent Request" : "Friend Request"}
       </h2>
@@ -32,7 +32,7 @@ const Request = () => {
       </button>
 
       {!show && (
-        <div className="person overflow-y-auto h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841] mt-10">
+        <div className="person overflow-y-auto h-[calc(100vh-246px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841] mt-10">
           {list.map(
             (item) =>
               item.participantId == userInfo.uid && (

@@ -128,16 +128,16 @@ const Home = () => {
   }
 
   return (
-    <div className="flex">
-      <nav className="bg-nav_bg h-screen flex flex-col justify-between px-2 min-w-19 max-w-19 pt-3">
+    <div className="flex flex-col-reverse lg:flex-row">
+      <nav className="bg-nav_bg lg:h-screen flex items-center lg:flex-col justify-between px-2 lg:min-w-19 lg:max-w-19 pt-3 h-16">
         <div className="flex justify-center">
           <img src="images/logo.png" alt="logo" />
         </div>
-        <div>
+        <div className="flex lg:flex-col">
           <div
             onClick={handleProf}
             ref={profilebgref}
-            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <MdOutlinePerson3 />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -147,14 +147,14 @@ const Home = () => {
           <div
             onClick={hancleChat}
             ref={chatbgref}
-            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer bg-brand"
+            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer bg-brand"
           >
             <BsChatRight />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Chats
             </div>
           </div>
-          <div className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer">
+          <div className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer">
             <FaUserGroup />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Groups
@@ -163,7 +163,7 @@ const Home = () => {
           <div
             onClick={handleContact}
             ref={ContactBgRef}
-            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <GrContactInfo />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -173,7 +173,7 @@ const Home = () => {
           <div
             onClick={handleReq}
             ref={requestbgRef}
-            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <FaUserPlus />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -183,7 +183,7 @@ const Home = () => {
           <div
             onClick={handleSett}
             ref={settingsbgref}
-            className="text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <IoSettingsOutline />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -203,7 +203,7 @@ const Home = () => {
           {editable && (
             <div
               ref={updateProfileRef}
-              className="py-2 w-40 border border-[rgba(255,255,255,0.28)] bg-[#303841] text-sm absolute bottom-full left-0 rounded-md text-primary z-10"
+              className="py-2 w-40 border border-[rgba(255,255,255,0.28)] bg-[#303841] text-sm absolute bottom-full right-2/10 lg:left-0 rounded-md text-primary z-10"
             >
               <div
                 onClick={handleProf}
@@ -243,7 +243,7 @@ const Home = () => {
       <div ref={ContactRef} className="hidden">
         <Contact />
       </div>
-      <div className="w-full">
+      <div className="w-full hidden lg:block">
         {activeFriend ? (
           <ChatBox />
         ) : (

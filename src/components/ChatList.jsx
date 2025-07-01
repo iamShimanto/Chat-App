@@ -56,7 +56,7 @@ const ChatList = () => {
 
   return (
     <>
-      <div className=" pt-5 h-screen min-w-96 w-96 bg-[#262e35]">
+      <div className=" pt-5 h-full lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35]">
         <div className="heading flex justify-between items-center px-4">
           <div className="text-2xl text-white font-medium">Chats</div>
           <button
@@ -94,7 +94,7 @@ const ChatList = () => {
         <div className="text-xl text-primary font-semibold mb-2 ml-4">
           Recent
         </div>
-        <div className="person overflow-y-auto h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
+        <div className="person overflow-y-auto h-[calc(100vh-255px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
           {friendList.map(
             (item) =>
               (item.creatorId == userInfo.uid && (
