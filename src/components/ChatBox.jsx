@@ -3,6 +3,7 @@ import { IoSend } from "react-icons/io5";
 import { GrEmoji } from "react-icons/gr";
 import { useSelector } from "react-redux";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import EmojiPicker from "emoji-picker-react";
 
 const ChatBox = () => {
   const userInfo = useSelector((state) => state.userData.user);
@@ -10,6 +11,7 @@ const ChatBox = () => {
   const db = getDatabase();
   const [messageContent, setMessageContent] = useState("");
   const [message, setMessage] = useState([]);
+  const [emoji, setEmoji] = useState(false);
 
   // ============ write message
   const handleSendMessage = (e) => {
@@ -23,6 +25,7 @@ const ChatBox = () => {
       });
     }
     setMessageContent("");
+    setEmoji(false)
   };
 
   // ============ read message
@@ -75,17 +78,27 @@ const ChatBox = () => {
         </div>
         <form
           onSubmit={handleSendMessage}
-          className="mt-2 ml-4 mr-6 bg-nav_bg px-3 py-4 flex items-center rounded-lg"
+          className="mt-2 ml-4 mr-6 bg-nav_bg px-3 py-4 flex items-center rounded-lg relative"
         >
+          {emoji && (
+            <div className="absolute bottom-15 right-10">
+              <EmojiPicker onEmojiClick={(e)=> setMessageContent((prev)=> prev + e.emoji)} />
+            </div>
+          )}
           <input
-            onChange={(e) => setMessageContent(e.target.value)}
+            onChange={(e) => (setMessageContent(e.target.value), setEmoji(false))}
             value={messageContent}
             className="w-full outline-none rounded-md pl-3 text-base font-normal font-inter text-white bg-transparent placeholder-[#99AAB5]"
             type="text"
             placeholder="Text Here"
           />
           <div className="emoji flex items-center gap-3 text-2xl text-[#99AAB5]">
-            <GrEmoji className="cursor-pointer hover:text-[#7289DA] duration-300" />
+            <div>
+              <GrEmoji
+                onClick={() => setEmoji(!emoji)}
+                className="cursor-pointer hover:text-[#7289DA] duration-300"
+              />
+            </div>
             <button>
               <IoSend className="cursor-pointer hover:text-[#7289DA] duration-300" />
             </button>
