@@ -13,7 +13,7 @@ const ChatList = () => {
   const addFriendRef = useRef(null);
   const [friendList, setFriendList] = useState([]);
 
-  // ============= add data
+  // ============= add freind data show
   const handleAdd = () => {
     const arr = [];
     onValue(ref(db, "users/"), (snapshot) => {
@@ -35,6 +35,7 @@ const ChatList = () => {
     });
     setAdd(true);
   };
+  // ============= add freind data show
 
   // ============= outside click event
   window.addEventListener("mousedown", (e) => {
@@ -53,6 +54,7 @@ const ChatList = () => {
       setFriendList(arr);
     });
   }, []);
+  // ============= friend list data
 
   return (
     <>
@@ -94,6 +96,9 @@ const ChatList = () => {
         <div className="text-xl text-primary font-semibold mb-2 ml-4">
           Recent
         </div>
+
+        {/* ============= show freind ================= */}
+        
         <div className="person overflow-y-auto h-[calc(100vh-255px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
           {friendList.map(
             (item) =>

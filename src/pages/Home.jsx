@@ -129,7 +129,9 @@ const Home = () => {
 
   return (
     <div className="flex flex-col-reverse lg:flex-row">
-      <nav className="bg-nav_bg lg:h-screen flex items-center lg:flex-col justify-between px-2 lg:min-w-19 lg:max-w-19 pt-3 h-16">
+      {/* ================ navbar ==================== */}
+
+      <nav className="bg-nav_bg lg:h-screen flex items-center lg:flex-col justify-between px-2 lg:min-w-19 lg:max-w-19 pt-3 h-20">
         <div className="flex justify-center">
           <img src="images/logo.png" alt="logo" />
         </div>
@@ -137,7 +139,7 @@ const Home = () => {
           <div
             onClick={handleProf}
             ref={profilebgref}
-            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-lg sm:text-xl lg:text-2xl w-full flex justify-center p-3 sm:p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <MdOutlinePerson3 />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -147,14 +149,14 @@ const Home = () => {
           <div
             onClick={hancleChat}
             ref={chatbgref}
-            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer bg-brand"
+            className="text-lg sm:text-xl lg:text-2xl w-full flex justify-center p-3 sm:p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer bg-brand"
           >
             <BsChatRight />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Chats
             </div>
           </div>
-          <div className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer">
+          <div className="text-lg sm:text-xl lg:text-2xl w-full flex justify-center p-3 sm:p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer">
             <FaUserGroup />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
               Groups
@@ -163,7 +165,7 @@ const Home = () => {
           <div
             onClick={handleContact}
             ref={ContactBgRef}
-            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-lg sm:text-xl lg:text-2xl w-full flex justify-center p-3 sm:p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <GrContactInfo />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -173,7 +175,7 @@ const Home = () => {
           <div
             onClick={handleReq}
             ref={requestbgRef}
-            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-lg sm:text-xl lg:text-2xl w-full flex justify-center p-3 sm:p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <FaUserPlus />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -183,7 +185,7 @@ const Home = () => {
           <div
             onClick={handleSett}
             ref={settingsbgref}
-            className="text-xl lg:text-2xl w-full flex justify-center p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
+            className="text-lg sm:text-xl lg:text-2xl w-full flex justify-center p-3 sm:p-4 rounded-lg profile group relative focus:bg-[#3E4A56] text-icons cursor-pointer"
           >
             <IoSettingsOutline />
             <div className="px-4 py-2 bg-white !text-black text-sm hidden group-hover:block absolute bottom-8/10 rounded-md">
@@ -193,7 +195,7 @@ const Home = () => {
         </div>
         <div
           onClick={() => handleProfile()}
-          className="photoUrl flex justify-center pb-3.5 cursor-pointer relative"
+          className="photoUrl flex justify-center pb-3.5 cursor-pointer mt-auto relative"
         >
           <img
             className="rounded-full w-9 h-9"
@@ -228,6 +230,9 @@ const Home = () => {
           )}
         </div>
       </nav>
+      {/* ================ navbar ==================== */}
+
+      {/* ================ navabr request components ================== */}
       <div className="border-r border-nav_bg" ref={chatlistref}>
         <ChatList />
       </div>
@@ -243,18 +248,24 @@ const Home = () => {
       <div ref={ContactRef} className="hidden">
         <Contact />
       </div>
+      {/* ================ navabr request components ================== */}
+
+      {/* ============= chat box =============== */}
       <div className="w-full hidden lg:block">
         {activeFriend ? (
           <ChatBox />
         ) : (
-          <div className="flex justify-center items-center h-screen flex-col gap-4">
+          <div className="flex justify-center items-center h-screen flex-col gap-3 sm:p-4">
             <div className="icons w-30 h-30 bg-icons rounded-full flex justify-center items-center text-5xl text-primary">
               <FiMessageSquare />
             </div>
-            <p className="px-4 py-2 bg-icons rounded-full text-xl font-bold text-primary">Start Conversation</p>
+            <p className="px-4 py-2 bg-icons rounded-full text-xl font-bold text-primary">
+              Start Conversation
+            </p>
           </div>
         )}
       </div>
+      {/* ============= chat box =============== */}
     </div>
   );
 };

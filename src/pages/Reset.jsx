@@ -8,6 +8,7 @@ const Reset = () => {
   const auth = getAuth();
   const [userEmail, setUserEmail] = useState();
 
+  // =============== reset email
   const handleSubmit = (e) => {
     e.preventDefault();
     sendPasswordResetEmail(auth, userEmail)

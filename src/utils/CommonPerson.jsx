@@ -18,6 +18,7 @@ const CommonPerson = ({
     remove(ref(db, "requestList/" + data.id));
   };
 
+  // ================= add to friendList and remove in requestlist
   const handleAdd = (item) => {
     set(push(ref(db, "friendList/")), {
       creatorName: item.creatorName,

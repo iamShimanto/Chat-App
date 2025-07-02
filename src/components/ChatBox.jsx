@@ -12,7 +12,7 @@ const ChatBox = () => {
   const [messageContent, setMessageContent] = useState("");
   const [message, setMessage] = useState([]);
   const [emoji, setEmoji] = useState(false);
-  const emojiRef = useRef(null)
+  const emojiRef = useRef(null);
 
   // ============ write message
   const handleSendMessage = (e) => {
@@ -28,6 +28,7 @@ const ChatBox = () => {
     setMessageContent("");
     setEmoji(false);
   };
+  // ============ write message
 
   // ============ read message
   useEffect(() => {
@@ -46,14 +47,15 @@ const ChatBox = () => {
       });
     });
   }, [activeFriend]);
+  // ============ read message
 
-
+  // =================== emoji box click ====================
   window.addEventListener("mousedown", (e) => {
     if (emojiRef.current && !emojiRef.current.contains(e.target)) {
       setEmoji(false);
     }
-  })
-
+  });
+  // =================== emoji box click ====================
 
   return (
     <>
@@ -74,11 +76,17 @@ const ChatBox = () => {
           <div className="flex flex-col gap-5 pb-10 my-2">
             {message.map((item) =>
               item.senderId === userInfo.uid ? (
-                <p key={item.id} className="px-4 py-2 bg-nav_bg w-fit text-primary rounded-xl rounded-br-none max-w-4/5 ml-auto">
+                <p
+                  key={item.id}
+                  className="px-4 py-2 bg-nav_bg w-fit text-primary rounded-xl rounded-br-none max-w-4/5 ml-auto"
+                >
                   {item.message}
                 </p>
               ) : (
-                <p key={item.id} className="px-4 py-2 bg-brand w-fit text-primary rounded-xl rounded-bl-none max-w-4/5">
+                <p
+                  key={item.id}
+                  className="px-4 py-2 bg-brand w-fit text-primary rounded-xl rounded-bl-none max-w-4/5"
+                >
                   {item.message}
                 </p>
               )

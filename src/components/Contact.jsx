@@ -24,6 +24,9 @@ const Contact = () => {
         FriendList
       </h2>
       <div className="person overflow-y-auto h-[calc(100vh-230px)] lg:h-[calc(100vh-140px)] overflow-x-hidden bg-[#303841] mt-10">
+
+        {/* ================ friend list show =============== */}
+
         {friendList.map(
           (item) =>
             (item.creatorId == userInfo.uid && (

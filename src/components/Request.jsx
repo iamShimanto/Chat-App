@@ -9,6 +9,7 @@ const Request = () => {
   const [list, setList] = useState([]);
   const [show, setShow] = useState(false);
 
+  // ================= request data show ==============
   useEffect(() => {
     onValue(ref(db, "requestList/"), (snapshot) => {
       let arr = [];
@@ -31,6 +32,7 @@ const Request = () => {
         {show ? "See Friend Request" : "See Sent Request"}
       </button>
 
+      {/* ========== friend request ================= */}
       {!show && (
         <div className="person overflow-y-auto h-[calc(100vh-246px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841] mt-10">
           {list.map(
@@ -50,8 +52,9 @@ const Request = () => {
         </div>
       )}
 
+            {/*  ============== sent request =============== */}
       {show && (
-        <div className="person overflow-y-auto h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841] mt-10">
+        <div className="person overflow-y-auto h-[calc(100vh-246px)] overflow-x-hidden bg-[#303841] mt-10">
           {list.map(
             (item) =>
               item.creatorId == userInfo.uid && (

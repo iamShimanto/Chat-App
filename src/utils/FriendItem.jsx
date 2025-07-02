@@ -21,6 +21,7 @@ const FriendItem = ({
     }
   };
 
+  // ============= remove friend
   const handleRemove = () => {
     remove(ref(db, "friendList/" + id));
   };
