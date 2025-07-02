@@ -131,7 +131,7 @@ const Home = () => {
     <div className="flex flex-col-reverse lg:flex-row">
       {/* ================ navbar ==================== */}
 
-      <nav className="bg-nav_bg lg:h-screen flex items-center lg:flex-col justify-between px-2 lg:min-w-19 lg:max-w-19 pt-3 h-20 z-50 overflow-hidden">
+      <nav className="bg-nav_bg lg:h-screen flex items-center lg:flex-col justify-between px-2 lg:min-w-19 lg:max-w-19 pt-3 h-20">
         <div className="flex justify-center">
           <img src="images/logo.png" alt="logo" />
         </div>
