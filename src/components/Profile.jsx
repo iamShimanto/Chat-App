@@ -77,7 +77,7 @@ const Profile = () => {
             })}
           </p>
         </div>
-        <div className="location mt-5 ml-3">
+        <div className="location mt-5 ml-3 hidden lg:block">
           <p className="text-base font-medium text-secondary leading-8">
             Location
           </p>
