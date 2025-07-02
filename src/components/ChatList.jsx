@@ -99,7 +99,7 @@ const ChatList = () => {
 
         {/* ============= show freind ================= */}
         
-        <div className="person overflow-y-auto h-[calc(100vh-255px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
+        <div className="person overflow-y-auto h-[calc(100vh-270px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
           {friendList.map(
             (item) =>
               (item.creatorId == userInfo.uid && (
