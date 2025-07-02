@@ -2,7 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoSend } from "react-icons/io5";
 import { GrEmoji } from "react-icons/gr";
 import { useSelector } from "react-redux";
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import {
+  getDatabase,
+  onValue,
+  push,
+  ref,
+  set,
+  update,
+} from "firebase/database";
 import EmojiPicker from "emoji-picker-react";
 
 const ChatBox = () => {
@@ -13,6 +20,7 @@ const ChatBox = () => {
   const [message, setMessage] = useState([]);
   const [emoji, setEmoji] = useState(false);
   const emojiRef = useRef(null);
+  const chatboxRef = useRef(null);
 
   // ============ write message
   const handleSendMessage = (e) => {
@@ -25,6 +33,12 @@ const ChatBox = () => {
         message: messageContent,
       });
     }
+
+    update(ref(db, "friendList/" + activeFriend.messageId), {
+      lastMessage: messageContent,
+      time: new Date().toLocaleTimeString(),
+    });
+
     setMessageContent("");
     setEmoji(false);
   };
@@ -57,6 +71,12 @@ const ChatBox = () => {
   });
   // =================== emoji box click ====================
 
+  useEffect(() => {
+    if (chatboxRef.current) {
+      chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;
+    }
+  }, [message]);
+
   return (
     <>
       <div className="h-screen w-full">
@@ -72,7 +92,10 @@ const ChatBox = () => {
             </h5>
           </div>
         </div>
-        <div className="message overflow-y-auto h-[calc(100vh-180px)] px-2">
+        <div
+          ref={chatboxRef}
+          className="message overflow-y-auto h-[calc(100vh-180px)] px-2"
+        >
           <div className="flex flex-col gap-5 pb-10 my-2">
             {message.map((item) =>
               item.senderId === userInfo.uid ? (

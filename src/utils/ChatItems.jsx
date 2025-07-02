@@ -8,6 +8,8 @@ const ChatItems = ({
   avater,
   name,
   id,
+  messageId,
+  lastMessage,
   styling = "bg-white",
   stylingName = "text-black22",
   time,
@@ -15,9 +17,9 @@ const ChatItems = ({
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
-  // ============== user data ==> redux 
+  // ============== user data ==> redux
   const handleClick = () => {
-    dispatch(selectConversation({ name, avater, id }));
+    dispatch(selectConversation({ name, avater, id, messageId }));
     setShow(true);
   };
 
@@ -29,12 +31,20 @@ const ChatItems = ({
       >
         <div className="profile flex gap-4">
           <img className="w-12 h-12 rounded-full" src={avater} alt="logo" />
-          <h4
-            className={`${stylingName} text-lg font-semibold font-inter my-auto`}
-          >
-            {name}
-          </h4>
+          <div>
+            <h4
+              className={`${stylingName} text-lg font-semibold font-inter my-auto`}
+            >
+              {name}
+            </h4>
+            <p className="text-secondary">
+              {lastMessage && lastMessage.length > 12
+                ? lastMessage.substring(0, 10) + " ..."
+                : lastMessage}
+            </p>
+          </div>
         </div>
+
         <p className="text-[rgba(255,255,255,0.47)]">{time}</p>
       </div>
       <div className="lg:hidden">

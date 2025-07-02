@@ -29,6 +29,7 @@ const CommonPerson = ({
       participantAvater: item.participantAvater,
       participantId: item.participantId,
       participantEmail: item.participantEmail,
+      lastMessage: "",
     });
     setTimeout(() => {
       remove(ref(db, "requestList/" + item.id));

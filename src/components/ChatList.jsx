@@ -98,18 +98,20 @@ const ChatList = () => {
         </div>
 
         {/* ============= show freind ================= */}
-        
+
         <div className="person overflow-y-auto h-[calc(100vh-255px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
           {friendList.map(
             (item) =>
               (item.creatorId == userInfo.uid && (
                 <ChatItems
                   key={item.id}
+                  messageId={item.id}
+                  lastMessage={item.lastMessage}
                   name={item.participantName}
                   avater={item.participantAvater}
                   email={item.participantEmail}
                   id={item.participantId}
-                  time="12 : 30 am"
+                  time={item.time}
                   styling="bg-[#1A1D21]"
                   stylingName="text-white"
                   stylingMessage="text-[#99AAB5]"
@@ -118,11 +120,13 @@ const ChatList = () => {
               (item.participantId == userInfo.uid && (
                 <ChatItems
                   key={item.id}
+                  messageId={item.id}
+                  lastMessage={item.lastMessage}
                   name={item.creatorName}
                   avater={item.creatorAvater}
                   email={item.creatorEmail}
                   id={item.creatorId}
-                  time="12 : 30 am"
+                  time={item.time}
                   styling="bg-[#1A1D21]"
                   stylingName="text-white"
                 />
