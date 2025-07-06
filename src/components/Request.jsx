@@ -34,7 +34,7 @@ const Request = () => {
 
       {/* ========== friend request ================= */}
       {!show && (
-        <div className="person overflow-y-auto h-[calc(100vh-246px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841] mt-10">
+        <div className="person overflow-y-auto h-[calc(100vh-246px)] lg:h-[calc(100vh-173px)] overflow-x-hidden bg-[#303841] mt-10">
           {list.map(
             (item) =>
               item.participantId == userInfo.uid && (
@@ -52,9 +52,9 @@ const Request = () => {
         </div>
       )}
 
-            {/*  ============== sent request =============== */}
+      {/*  ============== sent request =============== */}
       {show && (
-        <div className="person overflow-y-auto h-[calc(100vh-246px)] overflow-x-hidden bg-[#303841] mt-10">
+        <div className="person overflow-y-auto h-[calc(100vh-246px)] lg:h-[calc(100vh-173px)] overflow-x-hidden bg-[#303841] mt-10">
           {list.map(
             (item) =>
               item.creatorId == userInfo.uid && (
