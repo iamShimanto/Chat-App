@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useSelector } from "react-redux";
-import UserList from "../utils/UserList";
-import ChatItems from "../utils/ChatItems";
+import ChatItems from "../../utils/ChatItems";
+import UserList from "../../utils/UserList";
 
 const ChatList = () => {
   const db = getDatabase();

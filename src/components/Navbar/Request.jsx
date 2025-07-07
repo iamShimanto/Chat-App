@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CommonPerson from "../utils/CommonPerson";
+import CommonPerson from "../../utils/CommonPerson";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { useSelector } from "react-redux";
 
@@ -21,7 +21,7 @@ const Request = () => {
   }, []);
 
   return (
-    <div className=" pt-5 h-full lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35]">
+    <div className=" pt-5 h-full lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35] border-r border-[rgba(255,255,255,0.1)]">
       <h2 className="text-4xl text-white font-semibold ml-10 mt-10">
         {show ? "Sent Request" : "Friend Request"}
       </h2>

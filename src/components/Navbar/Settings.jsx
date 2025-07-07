@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getDatabase, ref, onValue, update } from "firebase/database";
 import { FaEdit } from "react-icons/fa";
 import { getAuth, updateProfile } from "firebase/auth";
-import { loggedUser } from "../store/slices/authSlice";
+import { loggedUser } from "../../store/slices/authSlice";
 
 const Settings = () => {
   const userInfo = useSelector((state) => state.userData.user);

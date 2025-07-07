@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { selectConversation } from "../store/slices/conversationSlice";
-import ChatBox from "../components/ChatBox";
+import ChatBox from "../components/Chat/ChatBox";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ChatItems = ({
