@@ -51,14 +51,14 @@ const GroupChatBox = () => {
     onValue(ref(db, "groupMessages"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        // if (
-        //   (item.val().senderId === userInfo.uid ||
-        //     item.val().recieverId === userInfo.uid) &
-        //   (item.val().senderId === activeGroup.creatorId ||
-        //     item.val().recieverId === activeGroup.creatorId)
-        // ) {
+        if (
+          (item.val().senderId === activeGroup.creator ||
+            item.val().recieverId === activeGroup.id) &
+          (item.val().senderId === userInfo.uid ||
+            item.val().recieverId === activeGroup.id)
+        ) {
         arr.push({ ...item.val(), id: item.key });
-        // }
+        }
       });
       setMessage(arr);
     });
