@@ -32,6 +32,7 @@ const GroupChatBox = () => {
         senderId: userInfo.uid,
         recieverId: activeGroup.id,
         message: messageContent,
+        senderName: userInfo.displayName,
       });
     }
 
@@ -100,16 +101,18 @@ const GroupChatBox = () => {
               item.senderId === userInfo.uid ? (
                 <p
                   key={item.id}
-                  className="px-4 py-2 bg-nav_bg w-fit text-primary rounded-xl rounded-br-none max-w-4/5 ml-auto"
+                  className="px-4 py-2 bg-nav_bg w-fit text-primary rounded-xl rounded-br-none max-w-4/5 ml-auto flex flex-col"
                 >
                   {item.message}
+                  <span className="text-xs">{item.senderName}</span>
                 </p>
               ) : (
                 <p
                   key={item.id}
-                  className="px-4 py-2 bg-brand w-fit text-primary rounded-xl rounded-bl-none max-w-4/5"
+                  className="px-4 py-2 bg-brand w-fit text-primary rounded-xl rounded-bl-none max-w-4/5 flex flex-col"
                 >
                   {item.message}
+                  <span className="text-xs">{item.senderName}</span>
                 </p>
               )
             )}
