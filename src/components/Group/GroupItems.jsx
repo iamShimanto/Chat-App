@@ -1,33 +1,39 @@
 import { getDatabase, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import AddGroupItems from "./AddGroupItems";
+import { selectGroup } from "../../store/slices/conversationSlice";
 
 const GroupItems = ({ data }) => {
   const db = getDatabase();
   const [add, setAdd] = useState(false);
-  const [users, setUsers] = useState([]);
   const userInfo = useSelector((state) => state.userData.user);
+  const [friendList, setFriendList] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    onValue(ref(db, "users"), (snapshot) => {
+    onValue(ref(db, "friendList"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if (userInfo.uid !== item.key) {
+        if (
+          item.val().creatorId === userInfo.uid ||
+          item.val().participantId === userInfo.uid
+        )
           arr.push({ ...item.val(), id: item.key });
-        }
       });
-      setUsers(arr);
+      setFriendList(arr);
     });
   }, []);
-    
-    const handleAdd = (item) => {
-        console.log(item)
-    }
+
+  const handleClick = () => {
+    dispatch(selectGroup(data));
+  };
 
   return (
     <>
       <div className="relative">
         <div
+          onClick={handleClick}
           className={` flex justify-between items-center p-3 rounded-sm cursor-pointer hover:scale-101 hover:shadow-sm duration-300 mb-1 bg-[#262e35]`}
         >
           <div className="profile flex gap-4 items-center">
@@ -38,7 +44,7 @@ const GroupItems = ({ data }) => {
               <h4
                 className={`font-semibold font-inter my-auto text-2xl text-brand`}
               >
-                # {data.groupName}
+                {data.groupName}
               </h4>
             </div>
           </div>
@@ -59,18 +65,39 @@ const GroupItems = ({ data }) => {
               type="text"
               placeholder="Search"
             />
-            <div className="overflow-y-auto h-90 w-full p-5">
-              {users.map((item) => (
-                <div
-                  className="flex justify-between items-center text-xl font-bold text-white border border-primary my-1 px-3 py-2 rounded-lg"
-                  key={item.id}
-                >
-                  {item.username}{" "}
-                  <span onClick={()=> handleAdd(item)} className="px-4 py-2 bg-brand text-primary rounded-lg cursor-pointer hover:text-brand hover:bg-primary duration-300">
-                    Add
-                  </span>{" "}
-                </div>
-              ))}
+            <div className="person overflow-y-auto h-[calc(100vh-255px)] lg:h-[calc(100vh-183px)] overflow-x-hidden bg-[#303841]">
+              {friendList.map(
+                (item) =>
+                  (item.creatorId == userInfo.uid && (
+                    <AddGroupItems
+                      key={item.id}
+                      messageId={item.id}
+                      name={item.participantName}
+                      avater={item.participantAvater}
+                      email={item.participantEmail}
+                      id={item.participantId}
+                      time={item.time}
+                      styling="bg-[#1A1D21]"
+                      stylingName="text-white"
+                      stylingMessage="text-[#99AAB5]"
+                      groupData={data}
+                    />
+                  )) ||
+                  (item.participantId == userInfo.uid && (
+                    <AddGroupItems
+                      key={item.id}
+                      messageId={item.id}
+                      name={item.creatorName}
+                      avater={item.creatorAvater}
+                      email={item.creatorEmail}
+                      id={item.creatorId}
+                      time={item.time}
+                      styling="bg-[#1A1D21]"
+                      stylingName="text-white"
+                      groupData={data}
+                    />
+                  ))
+              )}
             </div>
           </div>
         )}

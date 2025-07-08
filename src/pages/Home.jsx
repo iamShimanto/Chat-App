@@ -23,6 +23,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userData.user);
   const activeFriend = useSelector((state) => state.activeFriend.friend);
+  const activeGroup = useSelector((state) => state.activeFriend.group);
 
   // =============== use ref ========
   const chatlistref = useRef(null);
@@ -306,10 +307,11 @@ const Home = () => {
           </div>
         )}
       </div>
+  
       {/* ============= chat box =============== */}
       {/* ============= group chat box =============== */}
       <div ref={GroupChatBoxRef} className="w-full hidden">
-        {activeFriend ? (
+        {activeGroup ? (
           <GroupChatBox />
         ) : (
           <div className="flex justify-center items-center h-screen flex-col gap-3 sm:p-4">

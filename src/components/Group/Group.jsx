@@ -9,8 +9,9 @@ const Group = () => {
   const [createGroup, setCreateGroup] = useState(false);
   const createGroupRef = useRef(null);
   const [groupName, setGroupName] = useState("");
-  const [groupList, setGroupList] = useState([]);
   const userInfo = useSelector((state) => state.userData.user);
+  const [groupList, setGroupList] = useState([]);
+  const [groupMember, setGroupMember] = useState([]);
 
   window.addEventListener("mousedown", (e) => {
     if (createGroupRef.current && !createGroupRef.current.contains(e.target)) {
@@ -19,34 +20,50 @@ const Group = () => {
   });
 
   // =============== create group
+
   const handleCreateGroup = () => {
     if (groupName) {
-      set(push(ref(db, "groupList/")), {
+      set(push(ref(db, "groups/")), {
         groupName,
         creatorName: userInfo.displayName,
         creatorId: userInfo.uid,
       });
-      toast.success("Group Created Successfully!");
+      toast.success("Group created successfully!");
       setCreateGroup(false);
       setGroupName("");
     } else {
-      toast.error("Enter valid group Name!");
+      toast.error("Please enter valid group name");
     }
   };
+
   // =============== create group
 
   // =============== group show
+
   useEffect(() => {
-    onValue(ref(db, "groupList"), (snapshot) => {
+    onValue(ref(db, "groups"), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if (item.val().creatorId === userInfo.uid) {
-          arr.push({ ...item.val(), id: item.key });
-        }
+        arr.push({ ...item.val(), id: item.key });
       });
       setGroupList(arr);
     });
   }, []);
+
+  useEffect(() => {
+    onValue(ref(db, "groupMember/"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        item.forEach((data) => {
+          if (data.val().memberId === userInfo.uid) {
+            arr.push(item.key);
+          }
+        });
+      });
+      setGroupMember(arr);
+    });
+  }, []);
+
   // =============== group show
 
   return (
@@ -88,9 +105,13 @@ const Group = () => {
         )}
       </div>
       <div className="mt-5 overflow-y-auto h-[calc(100vh-255px)] lg:h-[calc(100vh-188px)] overflow-x-hidden">
-        {groupList.map((item) => (
-          <GroupItems key={item.id} data={item} />
-        ))}
+        {groupList.map(
+          (item) =>
+            (item.creatorId === userInfo.uid ||
+              groupMember.includes(item.id)) && (
+              <GroupItems key={item.id} data={item} />
+            )
+        )}
       </div>
     </div>
   );
