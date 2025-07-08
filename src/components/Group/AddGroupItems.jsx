@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import ChatBox from "../Chat/ChatBox";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
-import { useSelector } from "react-redux";
 
 const AddGroupItems = ({
   avater,
@@ -16,9 +15,7 @@ const AddGroupItems = ({
   const [show, setShow] = useState(false);
   const [groupMemberList, setGroupMemberList] = useState([]);
   const db = getDatabase();
-  const userInfo = useSelector((state) => state.userData.user);
 
-    
   const handleAddUser = () => {
     set(push(ref(db, "groupMember/" + groupData.id)), {
       groupId: groupData.id,
@@ -29,16 +26,19 @@ const AddGroupItems = ({
   };
 
   useEffect(() => {
-      onValue(ref(db, "groupMember/" + groupData.id), (snapshot) => {
+    onValue(ref(db, "groupMember/" + groupData.id), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val().creatorId + item.val().memberId);
+        arr.push(item.val().memberId); 
       });
       setGroupMemberList(arr);
     });
   }, []);
-    
-    
+
+  
+  const isAlreadyMember = groupMemberList.includes(id);
+  if (isAlreadyMember) return null;
+
   return (
     <>
       <div
@@ -55,17 +55,12 @@ const AddGroupItems = ({
             </h4>
           </div>
         </div>
-        {groupMemberList.includes(id + userInfo.uid) ||
-        groupMemberList.includes(userInfo.uid + id) ? (
-          (reqRef.current.style = "display : none;")
-        ) : (
-          <button
-            onClick={handleAddUser}
-            className="add px-3 py-1.5 cursor-pointer !rounded-lg"
-          >
-            Add
-          </button>
-        )}
+        <button
+          onClick={handleAddUser}
+          className="add px-3 py-1.5 cursor-pointer !rounded-lg"
+        >
+          Add
+        </button>
       </div>
 
       <div className="lg:hidden">

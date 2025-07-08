@@ -22,7 +22,7 @@ const GroupChatBox = () => {
   const emojiRef = useRef(null);
   const chatboxRef = useRef(null);
 
-  console.log(activeGroup);
+
   // ============ write message
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ const GroupChatBox = () => {
           (item.val().senderId === userInfo.uid ||
             item.val().recieverId === activeGroup.id)
         ) {
-        arr.push({ ...item.val(), id: item.key });
+          arr.push({ ...item.val(), id: item.key });
         }
       });
       setMessage(arr);
