@@ -1,5 +1,5 @@
 import { getDatabase, onValue, ref } from "firebase/database";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddGroupItems from "./AddGroupItems";
 import { selectGroup } from "../../store/slices/conversationSlice";
@@ -10,7 +10,17 @@ const GroupItems = ({ data }) => {
   const userInfo = useSelector((state) => state.userData.user);
   const [friendList, setFriendList] = useState([]);
   const dispatch = useDispatch();
+  const addFriendRef = useRef(null)
 
+  // =========== outside click 
+  window.addEventListener("mousedown", (e) => {
+    if (addFriendRef.current && !addFriendRef.current.contains(e.target)) {
+      setAdd(false);
+    }
+  });
+  // =========== outside click
+
+  // ============== friend list show with filter
   useEffect(() => {
     onValue(ref(db, "friendList"), (snapshot) => {
       let arr = [];
@@ -25,6 +35,7 @@ const GroupItems = ({ data }) => {
     });
   }, []);
 
+  // ============= data transfer to redux
   const handleClick = () => {
     dispatch(selectGroup(data));
   };
@@ -57,7 +68,7 @@ const GroupItems = ({ data }) => {
         </div>
         {add && (
           <div
-            // ref={addFriendRef}
+            ref={addFriendRef}
             className="bg-[#1a1d21] py-10 absolute top-full left-0 z-10 w-full h-120 rounded-2xl add"
           >
             <input

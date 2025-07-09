@@ -3,21 +3,32 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
 import GroupItems from "./GroupItems";
+import JoinGroupItems from "./JoinGroupItems";
 
 const Group = () => {
   const db = getDatabase();
   const [createGroup, setCreateGroup] = useState(false);
+  const [joinGroup, setJoinGroup] = useState(false);
   const createGroupRef = useRef(null);
+  const joinGroupRef = useRef(null);
   const [groupName, setGroupName] = useState("");
   const userInfo = useSelector((state) => state.userData.user);
   const [groupList, setGroupList] = useState([]);
   const [groupMember, setGroupMember] = useState([]);
+  const [joinGroupMember, setJoinGroupMember] = useState([]);
 
+  // ============ outside click 
   window.addEventListener("mousedown", (e) => {
     if (createGroupRef.current && !createGroupRef.current.contains(e.target)) {
       setCreateGroup(false);
     }
   });
+  window.addEventListener("mousedown", (e) => {
+    if (joinGroupRef.current && !joinGroupRef.current.contains(e.target)) {
+      setJoinGroup(false);
+    }
+  });
+  // ============ outside click 
 
   // =============== create group
 
@@ -66,6 +77,24 @@ const Group = () => {
 
   // =============== group show
 
+  // ============ join group
+  const handleJoinGroup = () => {
+    setJoinGroup(true);
+    onValue(ref(db, "groups/"), (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (
+          !(item.val().creatorId === userInfo.uid) &
+          !groupMember.includes(item.key)
+        ) {
+          arr.push({ ...item.val(), id: item.key });
+        }
+      });
+      setJoinGroupMember(arr);
+    });
+  };
+  // ============ join group
+
   return (
     <div className=" pt-5 h-[calc(100vh-70px)] lg:h-screen w-full lg:min-w-96 lg:w-96 bg-[#262e35]">
       <ToastContainer position="top-left" autoClose={3000} />
@@ -79,7 +108,10 @@ const Group = () => {
         >
           Create
         </button>
-        <button className="w-30 h-12 bg-black border border-white text-white cursor-pointer rounded-lg hover:bg-white hover:text-black duration-300 font-semibold text-lg">
+        <button
+          onClick={handleJoinGroup}
+          className="w-30 h-12 bg-black border border-white text-white cursor-pointer rounded-lg hover:bg-white hover:text-black duration-300 font-semibold text-lg"
+        >
           Join
         </button>
         {createGroup && (
@@ -101,6 +133,22 @@ const Group = () => {
             >
               Create Group
             </button>
+          </div>
+        )}
+
+        {joinGroup && (
+          <div
+            ref={joinGroupRef}
+            className="bg-[#1a1d21] py-10 absolute top-15 left-0 z-10 w-full h-100 rounded-2xl add"
+          >
+            <h2 className="text-3xl font-bold capitalize text-primary text-center">
+              Join Group
+            </h2>
+            <div className="overflow-y-auto h-60 overflow-x-hidden">
+              {joinGroupMember.map((item) => (
+                <JoinGroupItems key={item.id} data={item} />
+              ))}
+            </div>
           </div>
         )}
       </div>

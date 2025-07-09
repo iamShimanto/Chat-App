@@ -73,6 +73,7 @@ const GroupChatBox = () => {
   });
   // =================== emoji box click ====================
 
+  // ================== last message show first
   useEffect(() => {
     if (chatboxRef.current) {
       chatboxRef.current.scrollTop = chatboxRef.current.scrollHeight;

@@ -12,10 +12,10 @@ const AddGroupItems = ({
   groupData,
 }) => {
   const reqRef = useRef(null);
-  const [show, setShow] = useState(false);
   const [groupMemberList, setGroupMemberList] = useState([]);
   const db = getDatabase();
 
+// ============== add to group member
   const handleAddUser = () => {
     set(push(ref(db, "groupMember/" + groupData.id)), {
       groupId: groupData.id,
@@ -25,17 +25,18 @@ const AddGroupItems = ({
     });
   };
 
+  // ============= group show
   useEffect(() => {
     onValue(ref(db, "groupMember/" + groupData.id), (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val().memberId); 
+        arr.push(item.val().memberId);
       });
       setGroupMemberList(arr);
     });
   }, []);
 
-  
+  // ============ if already in group then hide
   const isAlreadyMember = groupMemberList.includes(id);
   if (isAlreadyMember) return null;
 
@@ -61,20 +62,6 @@ const AddGroupItems = ({
         >
           Add
         </button>
-      </div>
-
-      <div className="lg:hidden">
-        {show && (
-          <div className="w-full h-screen absolute top-0 left-0 z-10 bg-slate-500">
-            <ChatBox />
-            <button
-              onClick={() => setShow(false)}
-              className="text-3xl text-primary absolute top-2 left-2 px-6 py-2 bg-brand rounded-lg"
-            >
-              <IoMdArrowRoundBack />
-            </button>
-          </div>
-        )}
       </div>
     </>
   );
