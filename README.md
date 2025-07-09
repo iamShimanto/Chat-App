@@ -30,7 +30,7 @@ A real-time chat application built with **React**, **Firebase**, and **React Red
 ---
 ## 🙋‍♂️ Author
 
-**Shimanto Sarkar**  
+### **Shimanto Sarkar**  
 💼 MERN Stack Developer  
 📧 shimanto.dev.bd@gmail.com  
 🔗 [GitHub](https://github.com/shimanto)  
