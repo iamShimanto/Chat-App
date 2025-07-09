@@ -1,12 +1,40 @@
-# React + Vite
+# 💬 ShimantoChat — Real-Time Chat App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time chat application built with **React**, **Firebase**, and **React Redux**, enabling users to send and receive messages instantly. The app is fast, responsive, and perfect for one-on-one real-time communication.
 
-Currently, two official plugins are available:
+🚀 **Live Demo**: [shimantochat.vercel.app](https://shimantochat.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⚛️ **React** — Frontend framework
+- 🔥 **Firebase** — Realtime database and authentication
+- 🗃️ **React Redux** — Global state management
+- 🎨 **Tailwind CSS** *(if used)* — Styling (optional)
+
+---
+
+## ✨ Features
+
+- 🔐 **Firebase Authentication**
+  - Sign Up / Login / Logout
+- 💬 **Real-time Messaging**
+  - Messages instantly synced across devices
+- 📲 **Responsive Design**
+  - Works seamlessly on desktop and mobile
+- 👤 **User Session Handling**
+  - Persistent login with Redux & Firebase
+- 🌓 **(Optional)** Theme support *(Dark/Light)*
+
+---
+## 🙋‍♂️ Author
+
+**Shimanto Sarkar**  
+💼 MERN Stack Developer  
+📧 shimanto.dev.bd@gmail.com  
+🔗 [GitHub](https://github.com/shimanto)  
+📘 [Facebook](https://www.facebook.com/iamshimanto18)  
+🔗 [LinkedIn](https://www.linkedin.com/in/iam-shimanto/)
+
+
