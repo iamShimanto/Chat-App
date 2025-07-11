@@ -17,7 +17,7 @@ const Group = () => {
   const [groupMember, setGroupMember] = useState([]);
   const [joinGroupMember, setJoinGroupMember] = useState([]);
 
-  // ============ outside click 
+  // ============ outside click
   window.addEventListener("mousedown", (e) => {
     if (createGroupRef.current && !createGroupRef.current.contains(e.target)) {
       setCreateGroup(false);
@@ -28,7 +28,7 @@ const Group = () => {
       setJoinGroup(false);
     }
   });
-  // ============ outside click 
+  // ============ outside click
 
   // =============== create group
 
@@ -66,7 +66,10 @@ const Group = () => {
       let arr = [];
       snapshot.forEach((item) => {
         item.forEach((data) => {
-          if (data.val().memberId === userInfo.uid) {
+          if (
+            data.val().memberId === userInfo.uid ||
+            data.val().creatorId === userInfo.uid
+          ) {
             arr.push(item.key);
           }
         });
