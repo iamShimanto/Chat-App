@@ -11,7 +11,7 @@ A real-time chat application built with **React**, **Firebase**, and **React Red
 - ⚛️ **React** — Frontend framework
 - 🔥 **Firebase** — Realtime database and authentication
 - 🗃️ **React Redux** — Global state management
-- 🎨 **Tailwind CSS** *(if used)* — Styling (optional)
+- 🎨 **Tailwind CSS** — Styling
 
 ---
 
